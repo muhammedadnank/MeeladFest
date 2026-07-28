@@ -8,16 +8,17 @@ import { getFestPermission } from '@/lib/permissions';
 
 export async function GET(
   req: NextRequest,
-  { params }: { params: { festId: string } }
+  { params }: { params: Promise<{ festId: string }> }
 ) {
   try {
+    const { festId } = await params;
     const session = await getServerSession(authOptions);
     if (!session || !session.user) {
       return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
     }
 
     await connectDB();
-    const { isOwner } = await getFestPermission(session.user.id, params.festId);
+    const { isOwner } = await getFestPermission(session.user.id, festId);
     if (!isOwner) {
       return NextResponse.json({ error: 'Forbidden: Owner access required' }, { status: 403 });
     }
@@ -29,7 +30,7 @@ export async function GET(
     const limit = parseInt(searchParams.get('limit') || '20', 10);
     const skip = (page - 1) * limit;
 
-    const query: any = { festId: params.festId };
+    const query: any = { festId };
     if (userIdFilter) query.userId = userIdFilter;
     if (entityTypeFilter) query.entityType = entityTypeFilter;
 
