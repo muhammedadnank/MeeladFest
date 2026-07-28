@@ -116,7 +116,7 @@ export async function POST(req: Request) {
     await FestAdmin.create({
       festId: fest._id,
       userId: session.user.id,
-      invitedEmail: user?.email || session.user.email,
+      invitedEmail: user?.email || session.user?.email || 'admin@meeladfest.com',
       role: 'owner',
       permissions: { participants: true, results: true, updates: true, gallery: true },
       status: 'accepted',

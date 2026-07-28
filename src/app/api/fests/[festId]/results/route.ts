@@ -15,25 +15,22 @@ const DEFAULT_POINTS = {
   group: { 1: 10, 2: 6, 3: 2 },
 };
 
-// GET: List all declared results for a fest
+import { getFestBySlugOrId } from '@/lib/getFest';
+
+// GET: List all declared results for a fest (Public)
 export async function GET(
   req: Request,
   { params }: { params: Promise<{ festId: string }> }
 ) {
   try {
-    const { festId } = await params;
-    const session = await getServerSession(authOptions);
-
-    if (!session || !session.user) {
-      return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
-    }
-
-    const permissions = await getFestPermission(session.user.id, festId);
-    if (!permissions.hasAccess) {
-      return NextResponse.json({ error: 'Forbidden' }, { status: 403 });
-    }
-
+    const { festId: slugOrId } = await params;
     await connectDB();
+
+    const fest = await getFestBySlugOrId(slugOrId);
+    if (!fest) {
+      return NextResponse.json({ error: 'Festival not found' }, { status: 404 });
+    }
+    const festId = fest._id;
 
     const { searchParams } = new URL(req.url);
     const itemId = searchParams.get('itemId');

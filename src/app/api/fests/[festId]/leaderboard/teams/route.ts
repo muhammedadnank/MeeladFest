@@ -4,18 +4,21 @@ import Fest from '@/models/Fest';
 import Team from '@/models/Team';
 import Result from '@/models/Result';
 
+import { getFestBySlugOrId } from '@/lib/getFest';
+
 export async function GET(
   req: Request,
   { params }: { params: Promise<{ festId: string }> }
 ) {
   try {
-    const { festId } = await params;
+    const { festId: slugOrId } = await params;
     await connectDB();
 
-    const fest = await Fest.findById(festId);
-    if (!fest || fest.isDeleted) {
+    const fest = await getFestBySlugOrId(slugOrId);
+    if (!fest) {
       return NextResponse.json({ error: 'Festival not found' }, { status: 404 });
     }
+    const festId = fest._id;
 
     const teams = await Team.find({ festId }).sort({ name: 1 });
     const results = await Result.find({ festId });
@@ -37,7 +40,7 @@ export async function GET(
         team: {
           _id: t._id,
           name: t.name,
-          code: t.code,
+          code: (t as any).code || '',
           color: t.color,
         },
         totalPoints: 0,

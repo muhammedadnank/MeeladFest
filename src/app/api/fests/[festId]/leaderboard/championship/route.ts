@@ -4,21 +4,24 @@ import Fest from '@/models/Fest';
 import Result from '@/models/Result';
 import Participant from '@/models/Participant';
 
+import { getFestBySlugOrId } from '@/lib/getFest';
+
 export async function GET(
   req: Request,
   { params }: { params: Promise<{ festId: string }> }
 ) {
   try {
-    const { festId } = await params;
+    const { festId: slugOrId } = await params;
     await connectDB();
 
     const { searchParams } = new URL(req.url);
     const categoryId = searchParams.get('categoryId');
 
-    const fest = await Fest.findById(festId);
-    if (!fest || fest.isDeleted) {
+    const fest = await getFestBySlugOrId(slugOrId);
+    if (!fest) {
       return NextResponse.json({ error: 'Festival not found' }, { status: 404 });
     }
+    const festId = fest._id;
 
     const query: any = { festId, itemType: 'single', participantId: { $ne: null } };
     if (categoryId) query.categoryId = categoryId;
