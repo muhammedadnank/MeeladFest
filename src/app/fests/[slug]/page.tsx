@@ -18,6 +18,8 @@ import FestCountdown from '@/components/public/FestCountdown';
 import PublicLeaderboard from '@/components/public/PublicLeaderboard';
 import PublicPrograms from '@/components/public/PublicPrograms';
 
+import { CertificateLookup } from '@/components/public/CertificateLookup';
+
 interface PageProps {
   params: Promise<{ slug: string }>;
 }
@@ -194,6 +196,23 @@ export default async function PublicFestPage({ params }: PageProps) {
           </div>
 
           <PublicPrograms festIdOrSlug={slug} />
+        </section>
+
+        {/* Section 3: Certificate Engine */}
+        <section className="space-y-6 pt-6">
+          <div className="flex items-center justify-between border-b border-slate-800/80 pb-4">
+            <div>
+              <h2 className="text-2xl font-bold tracking-tight text-white flex items-center gap-2.5">
+                <Award className="w-6 h-6 text-amber-400" />
+                Official Certificate Engine
+              </h2>
+              <p className="text-xs sm:text-sm text-slate-400 mt-1">
+                Verify and download official participation and winner PDF certificates.
+              </p>
+            </div>
+          </div>
+
+          <CertificateLookup festId={festData._id} />
         </section>
       </main>
 
