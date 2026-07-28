@@ -21,11 +21,20 @@ export async function GET(
   }
 }
 
+import { checkRateLimit } from '@/lib/rate-limit';
+
 export async function POST(
   req: NextRequest,
   { params }: { params: { festId: string } }
 ) {
   try {
+    const ip = req.headers.get('x-forwarded-for') || '127.0.0.1';
+    const rateLimit = await checkRateLimit(ip, 'feedback_submit', 5, 60);
+
+    if (!rateLimit.allowed) {
+      return NextResponse.json({ error: 'Too many feedback submissions. Please try again later.' }, { status: 429 });
+    }
+
     await connectDB();
     const body = await req.json();
     const { name, rating, comment } = body;

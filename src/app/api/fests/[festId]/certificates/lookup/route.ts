@@ -10,11 +10,20 @@ import { getFestBySlugOrId } from '@/lib/getFest';
 import { generateVerificationCode } from '@/lib/certificate/verify';
 import { CertificateData, CertificateSearchResult } from '@/types/certificate';
 
+import { checkRateLimit } from '@/lib/rate-limit';
+
 export async function GET(
   req: Request,
   { params }: { params: Promise<{ festId: string }> }
 ) {
   try {
+    const ip = req.headers.get('x-forwarded-for') || '127.0.0.1';
+    const rateLimit = await checkRateLimit(ip, 'cert_lookup', 30, 60);
+
+    if (!rateLimit.allowed) {
+      return NextResponse.json({ error: 'Too many lookup requests. Please try again in a minute.' }, { status: 429 });
+    }
+
     const { festId: slugOrId } = await params;
     const { searchParams } = new URL(req.url);
     const chestNoQuery = searchParams.get('chestNo')?.trim();
