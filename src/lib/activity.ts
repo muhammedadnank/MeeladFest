@@ -7,7 +7,7 @@ export interface LogActivityParams {
   userId: string | mongoose.Types.ObjectId;
   role: 'owner' | 'subadmin';
   action: string;
-  entityType: 'participant' | 'group_entry' | 'result' | 'update' | 'gallery';
+  entityType: 'participant' | 'group_entry' | 'result' | 'update' | 'gallery' | 'faq' | 'feedback';
   entityId?: string | mongoose.Types.ObjectId;
   summary: string;
 }
