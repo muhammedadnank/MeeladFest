@@ -19,6 +19,12 @@ import PublicLeaderboard from '@/components/public/PublicLeaderboard';
 import PublicPrograms from '@/components/public/PublicPrograms';
 
 import { CertificateLookup } from '@/components/public/CertificateLookup';
+import PublicUpdates from '@/components/public/PublicUpdates';
+import PublicGallery from '@/components/public/PublicGallery';
+import PublicFaqAccordion from '@/components/public/PublicFaqAccordion';
+import PublicFeedbackForm from '@/components/public/PublicFeedbackForm';
+import PublicChampionshipLeaderboard from '@/components/public/PublicChampionshipLeaderboard';
+import { Radio, Image as ImageIcon, HelpCircle, MessageSquare } from 'lucide-react';
 
 interface PageProps {
   params: Promise<{ slug: string }>;
@@ -162,18 +168,35 @@ export default async function PublicFestPage({ params }: PageProps) {
         </div>
       </section>
 
-      {/* Main Content Area: Leaderboards & Schedule */}
-      <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 w-full flex-1 space-y-12">
-        {/* Section 1: Live Leaderboard */}
+      {/* Main Content Area */}
+      <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 w-full flex-1 space-y-16">
+        {/* Section 1: Live Updates Feed */}
+        <section className="space-y-6">
+          <div className="flex items-center justify-between border-b border-slate-800/80 pb-4">
+            <div>
+              <h2 className="text-2xl font-bold tracking-tight text-white flex items-center gap-2.5">
+                <Radio className="w-6 h-6 text-emerald-400 animate-pulse" />
+                Live Announcements & Updates
+              </h2>
+              <p className="text-xs sm:text-sm text-slate-400 mt-1">
+                Real-time updates posted directly by the festival management team.
+              </p>
+            </div>
+          </div>
+
+          <PublicUpdates festId={festData._id} />
+        </section>
+
+        {/* Section 2: Live Leaderboard */}
         <section className="space-y-6">
           <div className="flex items-center justify-between border-b border-slate-800/80 pb-4">
             <div>
               <h2 className="text-2xl font-bold tracking-tight text-white flex items-center gap-2.5">
                 <Trophy className="w-6 h-6 text-emerald-400" />
-                Live Competition Standings
+                Live Team Standings
               </h2>
               <p className="text-xs sm:text-sm text-slate-400 mt-1">
-                Real-time team point aggregation and individual championship rankings.
+                Real-time team point aggregation and standings.
               </p>
             </div>
           </div>
@@ -181,8 +204,25 @@ export default async function PublicFestPage({ params }: PageProps) {
           <PublicLeaderboard festIdOrSlug={slug} />
         </section>
 
-        {/* Section 2: Program Schedule */}
-        <section className="space-y-6 pt-6">
+        {/* Section 3: Individual Championship */}
+        <section className="space-y-6">
+          <div className="flex items-center justify-between border-b border-slate-800/80 pb-4">
+            <div>
+              <h2 className="text-2xl font-bold tracking-tight text-white flex items-center gap-2.5">
+                <Award className="w-6 h-6 text-amber-400" />
+                Individual Championship Rankings
+              </h2>
+              <p className="text-xs sm:text-sm text-slate-400 mt-1">
+                Top performing individual participants sorted by total points.
+              </p>
+            </div>
+          </div>
+
+          <PublicChampionshipLeaderboard festId={festData._id} />
+        </section>
+
+        {/* Section 4: Program Schedule */}
+        <section className="space-y-6">
           <div className="flex items-center justify-between border-b border-slate-800/80 pb-4">
             <div>
               <h2 className="text-2xl font-bold tracking-tight text-white flex items-center gap-2.5">
@@ -198,8 +238,25 @@ export default async function PublicFestPage({ params }: PageProps) {
           <PublicPrograms festIdOrSlug={slug} />
         </section>
 
-        {/* Section 3: Certificate Engine */}
-        <section className="space-y-6 pt-6">
+        {/* Section 5: Gallery */}
+        <section className="space-y-6">
+          <div className="flex items-center justify-between border-b border-slate-800/80 pb-4">
+            <div>
+              <h2 className="text-2xl font-bold tracking-tight text-white flex items-center gap-2.5">
+                <ImageIcon className="w-6 h-6 text-emerald-400" />
+                Festival Photo Gallery
+              </h2>
+              <p className="text-xs sm:text-sm text-slate-400 mt-1">
+                Highlights and captured moments from the festival.
+              </p>
+            </div>
+          </div>
+
+          <PublicGallery festId={festData._id} />
+        </section>
+
+        {/* Section 6: Certificate Engine */}
+        <section className="space-y-6">
           <div className="flex items-center justify-between border-b border-slate-800/80 pb-4">
             <div>
               <h2 className="text-2xl font-bold tracking-tight text-white flex items-center gap-2.5">
@@ -214,6 +271,40 @@ export default async function PublicFestPage({ params }: PageProps) {
 
           <CertificateLookup festId={festData._id} />
         </section>
+
+        {/* Section 7: FAQs */}
+        <section className="space-y-6">
+          <div className="flex items-center justify-between border-b border-slate-800/80 pb-4">
+            <div>
+              <h2 className="text-2xl font-bold tracking-tight text-white flex items-center gap-2.5">
+                <HelpCircle className="w-6 h-6 text-emerald-400" />
+                Frequently Asked Questions
+              </h2>
+              <p className="text-xs sm:text-sm text-slate-400 mt-1">
+                Got questions? Find answers to common festival inquiries below.
+              </p>
+            </div>
+          </div>
+
+          <PublicFaqAccordion festId={festData._id} />
+        </section>
+
+        {/* Section 8: Feedback */}
+        <section className="space-y-6">
+          <div className="flex items-center justify-between border-b border-slate-800/80 pb-4">
+            <div>
+              <h2 className="text-2xl font-bold tracking-tight text-white flex items-center gap-2.5">
+                <MessageSquare className="w-6 h-6 text-teal-400" />
+                Feedback & Reviews
+              </h2>
+              <p className="text-xs sm:text-sm text-slate-400 mt-1">
+                We value your thoughts and suggestions.
+              </p>
+            </div>
+          </div>
+
+          <PublicFeedbackForm festId={festData._id} />
+        </section>
       </main>
 
       {/* Footer */}
@@ -225,3 +316,4 @@ export default async function PublicFestPage({ params }: PageProps) {
     </div>
   );
 }
+
