@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import { useParams } from 'next/navigation';
-import FestAdminNav from '@/components/FestAdminNav';
+import FestAdminNav from '@/components/admin/FestAdminNav';
 import { History, ShieldAlert, User, ChevronLeft, ChevronRight, Loader2, AlertCircle } from 'lucide-react';
 
 interface ActivityLogItem {

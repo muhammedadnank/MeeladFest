@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import { useParams } from 'next/navigation';
-import FestAdminNav from '@/components/FestAdminNav';
+import FestAdminNav from '@/components/admin/FestAdminNav';
 import { MessageSquare, Star, Trash2, Loader2, AlertCircle, User } from 'lucide-react';
 
 interface FeedbackItem {

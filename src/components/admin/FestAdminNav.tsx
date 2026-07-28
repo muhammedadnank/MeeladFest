@@ -22,8 +22,9 @@ import {
 
 interface FestAdminNavProps {
   festId: string;
-  slug: string;
-  festName: string;
+  slug?: string;
+  festName?: string;
+  activeTab?: string;
   permissions?: {
     isOwner: boolean;
     canManageParticipants: boolean;
@@ -33,7 +34,7 @@ interface FestAdminNavProps {
   };
 }
 
-export default function FestAdminNav({ festId, slug, festName, permissions }: FestAdminNavProps) {
+export default function FestAdminNav({ festId, slug = '', festName = 'Fest Admin', permissions }: FestAdminNavProps) {
   const pathname = usePathname();
 
   const isOwner = permissions?.isOwner ?? true;

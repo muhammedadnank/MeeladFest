@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import { useParams } from 'next/navigation';
-import FestAdminNav from '@/components/FestAdminNav';
+import FestAdminNav from '@/components/admin/FestAdminNav';
 import { Image as ImageIcon, Trash2, Plus, Loader2, AlertCircle, ExternalLink } from 'lucide-react';
 
 interface GalleryItem {
