@@ -1,21 +1,23 @@
 # 🌙 MeeladFest
 
 > **Multi-Tenant Madrasa Fest Management Platform**  
-> A modern, serverless Next.js web application empowering madrasas across Kerala to seamlessly organize, manage, and showcase their annual Meelad Fest (Arts & Cultural Competition) with live leaderboards, granular sub-admin access, audit logs, and self-service PDF certificates.
+> A modern, serverless Next.js web application empowering madrasas across Kerala to seamlessly organize, manage, and showcase their annual Meelad Fest (Arts & Cultural Competition) with live leaderboards, granular sub-admin access, activity audit logs, FAQ & feedback support, and self-service PDF certificates.
 
 ---
 
 ## 🌟 Key Features
 
-- ** Multi-Tenant Fest Hosting**: Any madrasa ustad/admin can register and instantly create a custom fest page with a unique URL slug (`/fests/your-fest-slug`).
-- ** Granular Sub-Admin Permissions**: Fest owners can invite sub-admins (ustads) with custom permission toggles (`participants`, `results`, `updates`, `gallery`) and full activity auditing (`activity_log`).
-- ** No-Public-Registration Data Entry**: Admin/Sub-admin streamlined data entry for single and group items with Chest Number / Fest ID tracking and team capacity validation (`maxParticipantsPerTeam`).
-- ** Live Leaderboard & Championship**:
+- 🎪 **Multi-Tenant Fest Hosting**: Any madrasa admin/ustad can register and instantly create a custom fest page with a unique URL slug (`/fests/your-fest-slug`).
+- 🔐 **Granular Sub-Admin Permissions**: Fest owners can assign sub-admins with section-based permission controls (`participants`, `results`, `updates`, `gallery`) and full activity auditing.
+- 📋 **Data Entry & Chest Number Tracking**: Admin/sub-admin streamlined data entry for single and group items with Chest Number / Fest ID tracking and team capacity validation (`maxParticipantsPerTeam`).
+- 🏆 **Live Leaderboard & Championship**:
   - **Team Leaderboard**: Real-time category-wise and overall team point aggregation with standard tie handling.
-  - **Individual Championship**: Single competition points tracking per participant.
-- ** Self-Service PDF Certificates**: Fast `@react-pdf/renderer` PDF generation with embedded Malayalam typography (Noto Sans Malayalam). Visitors enter their Chest No to download participation and winner certificates without needing an account.
-- ** Live Feed & Gallery**: Cloudinary-powered image gallery and real-time announcement feed for public visitors.
-- ** Soft-Delete Safeguards**: Fest deletion and sub-admin access revocation are soft-deletes—no historical data or audit logs are ever permanently lost.
+  - **Individual Championship**: Individual competition points tracking per participant.
+- 📜 **Self-Service PDF Certificates**: Fast `@react-pdf/renderer` PDF generation with embedded Malayalam typography (Noto Sans Malayalam). Visitors enter their Chest No to download participation and winner certificates without needing an account.
+- 🖼️ **Live Feed & Gallery**: Cloudinary-powered image gallery and real-time announcement feed for public visitors.
+- ❓ **FAQ & Feedback System**: Public visitors can view FAQs and submit feedback, while fest admins can add, update, and manage FAQs and review incoming feedback.
+- 📝 **Activity Audit Logs**: Detailed audit logging (`activity_log`) tracking administrative operations across all modules for full operational transparency.
+- 🛡️ **Soft-Delete Safeguards**: Fest deletion and sub-admin access revocation use soft-deleting—ensuring no historical data or audit logs are permanently lost.
 
 ---
 
@@ -93,16 +95,16 @@ MeeladFest/
 ├── DB-Schema.md             # MongoDB Schema & Indexing Specifications
 ├── Implementation-Plan.md  # Phased Development Execution Plan
 ├── CHANGELOG.md             # Main Changelog Index
-├── changelogs/              # Version Release Notes (v0.1.0.md, etc.)
+├── changelogs/              # Version Release Notes
 ├── public/                  # Static Public Assets
 └── src/
     ├── app/                 # Next.js 14 App Router Pages & API Endpoints
     │   ├── (auth)/          # Authentication Pages (Login & Register)
-    │   ├── api/             # REST API Routes (fests, auth, subadmins)
+    │   ├── api/             # REST API Routes (fests, faqs, feedback, activity-logs, subadmins, etc.)
     │   └── dashboard/       # Administrative Control Center
     ├── components/          # Reusable UI Components & Providers
     ├── lib/                 # Core Helpers (DB, Auth, Permissions, Activity Logging)
-    ├── models/              # Mongoose Data Models (16 Collections)
+    ├── models/              # Mongoose Data Models
     └── types/               # TypeScript Type Definitions
 ```
 
@@ -114,7 +116,7 @@ MeeladFest/
 - ⚙️ [Technical Requirements Document (TRD)](TRD.md)
 - 🗄️ [Database Schema & Indexing Specifications](DB-Schema.md)
 - 🗺️ [Implementation Plan](Implementation-Plan.md)
-- 📜 [Changelog Index](CHANGELOG.md) ([v0.1.0 Release Notes](changelogs/v0.1.0.md))
+- 📜 [Changelog Index](CHANGELOG.md)
 
 ---
 
