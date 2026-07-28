@@ -14,7 +14,7 @@ export async function POST(req: Request) {
     }
 
     // Render PDF to buffer
-    const pdfStream = await pdf(React.createElement(CertificatePDF, { data: certData })).toBuffer();
+    const pdfStream = await pdf(React.createElement(CertificatePDF, { data: certData }) as any).toBuffer();
 
     const fileName = `Certificate_${certData.chestNo}_${certData.itemName.replace(/\s+/g, '_')}.pdf`;
 
