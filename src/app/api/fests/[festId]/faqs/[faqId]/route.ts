@@ -8,16 +8,17 @@ import { logActivity } from '@/lib/activity';
 
 export async function PUT(
   req: NextRequest,
-  { params }: { params: { festId: string; faqId: string } }
+  { params }: { params: Promise<{ festId: string; faqId: string }> }
 ) {
   try {
+    const { festId, faqId } = await params;
     const session = await getServerSession(authOptions);
     if (!session || !session.user) {
       return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
     }
 
     await connectDB();
-    const { isOwner, userId, role } = await getFestPermission(session.user.id, params.festId);
+    const { isOwner, userId, role } = await getFestPermission(session.user.id, festId);
     if (!isOwner) {
       return NextResponse.json({ error: 'Forbidden: Owner access required' }, { status: 403 });
     }
@@ -26,7 +27,7 @@ export async function PUT(
     const { question, answer, order } = body;
 
     const faq = await Faq.findOneAndUpdate(
-      { _id: params.faqId, festId: params.festId },
+      { _id: faqId, festId },
       { question, answer, order },
       { new: true, runValidators: true }
     );
@@ -37,7 +38,7 @@ export async function PUT(
 
     if (userId) {
       await logActivity({
-        festId: params.festId,
+        festId,
         userId,
         role: role === 'owner' ? 'owner' : 'subadmin',
         action: 'UPDATE_FAQ',
@@ -55,21 +56,22 @@ export async function PUT(
 
 export async function DELETE(
   req: NextRequest,
-  { params }: { params: { festId: string; faqId: string } }
+  { params }: { params: Promise<{ festId: string; faqId: string }> }
 ) {
   try {
+    const { festId, faqId } = await params;
     const session = await getServerSession(authOptions);
     if (!session || !session.user) {
       return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
     }
 
     await connectDB();
-    const { isOwner, userId, role } = await getFestPermission(session.user.id, params.festId);
+    const { isOwner, userId, role } = await getFestPermission(session.user.id, festId);
     if (!isOwner) {
       return NextResponse.json({ error: 'Forbidden: Owner access required' }, { status: 403 });
     }
 
-    const faq = await Faq.findOneAndDelete({ _id: params.faqId, festId: params.festId });
+    const faq = await Faq.findOneAndDelete({ _id: faqId, festId });
 
     if (!faq) {
       return NextResponse.json({ error: 'FAQ not found' }, { status: 404 });
@@ -77,7 +79,7 @@ export async function DELETE(
 
     if (userId) {
       await logActivity({
-        festId: params.festId,
+        festId,
         userId,
         role: role === 'owner' ? 'owner' : 'subadmin',
         action: 'DELETE_FAQ',
@@ -92,4 +94,3 @@ export async function DELETE(
     return NextResponse.json({ error: error.message || 'Failed to delete FAQ' }, { status: 500 });
   }
 }
-
