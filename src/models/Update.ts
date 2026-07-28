@@ -5,8 +5,6 @@ export interface IUpdate extends Document {
   text: string;
   imageUrl?: string;
   postedAt: Date;
-  createdAt: Date;
-  updatedAt: Date;
 }
 
 const UpdateSchema: Schema<IUpdate> = new Schema(
@@ -14,10 +12,12 @@ const UpdateSchema: Schema<IUpdate> = new Schema(
     festId: { type: Schema.Types.ObjectId, ref: 'Fest', required: true, index: true },
     text: { type: String, required: true, trim: true },
     imageUrl: { type: String, trim: true },
-    postedAt: { type: Date, default: Date.now, index: true },
+    postedAt: { type: Date, default: Date.now, index: -1 },
   },
   { timestamps: true }
 );
 
-const Update: Model<IUpdate> = mongoose.models.Update || mongoose.model<IUpdate>('Update', UpdateSchema);
+const Update: Model<IUpdate> =
+  mongoose.models.Update || mongoose.model<IUpdate>('Update', UpdateSchema);
+
 export default Update;
