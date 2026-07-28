@@ -23,16 +23,54 @@ export default function FestCountdown({ targetDate, festName }: FestCountdownPro
     isPast: false,
   });
 
+function parseTargetTimestamp(dateStr?: string): number | null {
+  if (!dateStr || !dateStr.trim()) return null;
+  const str = dateStr.trim();
+
+  // Try direct date parse
+  let ts = new Date(str).getTime();
+  if (!isNaN(ts)) return ts;
+
+  // Try extracting date inside parentheses or standard format e.g. "12 Rabiul Awwal 1448 AH (24 Aug 2026)"
+  const match = str.match(/\(([^)]+)\)/) || str.match(/\b(\d{1,2}\s+[A-Za-z]+\s+\d{4}|\d{4}-\d{2}-\d{2})\b/);
+  if (match) {
+    ts = new Date(match[1] || match[0]).getTime();
+    if (!isNaN(ts)) return ts;
+  }
+
+  return null;
+}
+
+export default function FestCountdown({ targetDate, festName }: FestCountdownProps) {
+  const [timeLeft, setTimeLeft] = useState<{
+    days: number;
+    hours: number;
+    minutes: number;
+    seconds: number;
+    isPast: boolean;
+    invalid: boolean;
+  }>({
+    days: 0,
+    hours: 0,
+    minutes: 0,
+    seconds: 0,
+    isPast: false,
+    invalid: false,
+  });
+
   useEffect(() => {
-    if (!targetDate) return;
+    const targetTimestamp = parseTargetTimestamp(targetDate);
+    if (!targetTimestamp) {
+      setTimeLeft({ days: 0, hours: 0, minutes: 0, seconds: 0, isPast: false, invalid: true });
+      return;
+    }
 
     const calculateTimeLeft = () => {
-      const target = new Date(targetDate).getTime();
       const now = new Date().getTime();
-      const difference = target - now;
+      const difference = targetTimestamp - now;
 
       if (difference <= 0) {
-        setTimeLeft({ days: 0, hours: 0, minutes: 0, seconds: 0, isPast: true });
+        setTimeLeft({ days: 0, hours: 0, minutes: 0, seconds: 0, isPast: true, invalid: false });
         return;
       }
 
@@ -41,7 +79,7 @@ export default function FestCountdown({ targetDate, festName }: FestCountdownPro
       const minutes = Math.floor((difference % (1000 * 60 * 60)) / (1000 * 60));
       const seconds = Math.floor((difference % (1000 * 60)) / 1000);
 
-      setTimeLeft({ days, hours, minutes, seconds, isPast: false });
+      setTimeLeft({ days, hours, minutes, seconds, isPast: false, invalid: false });
     };
 
     calculateTimeLeft();
