@@ -2,6 +2,8 @@
 
 > **Multi-Tenant Madrasa Fest Management Platform**  
 > A modern, serverless Next.js web application empowering madrasas across Kerala to seamlessly organize, manage, and showcase their annual Meelad Fest (Arts & Cultural Competition) with live leaderboards, granular sub-admin access, activity audit logs, FAQ & feedback support, and self-service PDF certificates.
+>
+> 🚀 **Live Demo:** [meelad-fest-kerala.vercel.app](https://meelad-fest-kerala.vercel.app)
 
 ---
 
@@ -11,8 +13,10 @@
 - 🔐 **Granular Sub-Admin Permissions**: Fest owners can assign sub-admins with section-based permission controls (`participants`, `results`, `updates`, `gallery`) and full activity auditing.
 - 📋 **Data Entry & Chest Number Tracking**: Admin/sub-admin streamlined data entry for single and group items with Chest Number / Fest ID tracking and team capacity validation (`maxParticipantsPerTeam`).
 - 🏆 **Live Leaderboard & Championship**:
-  - **Team Leaderboard**: Real-time category-wise and overall team point aggregation with standard tie handling.
-  - **Individual Championship**: Individual competition points tracking per participant.
+  - **Top 3 Winner Podiums**: Styled 1st (Gold 🥇), 2nd (Silver 🥈), and 3rd (Bronze 🥉) rank showcases for teams and individual champions.
+  - **Category Filtering & Search**: Instant filtering by age categories (Sub-Junior, Junior, Senior, etc.) and chest number/name searches.
+  - **Team Leaderboard**: Real-time category-wise and overall team point aggregation with animated progress bars and 30-second live auto-polling.
+  - **Individual Championship**: Points tracking per participant across single and group competition items.
 - 📜 **Self-Service PDF Certificates**: Fast `@react-pdf/renderer` PDF generation with embedded Malayalam typography (Noto Sans Malayalam). Visitors enter their Chest No to download participation and winner certificates without needing an account.
 - 🖼️ **Live Feed & Gallery**: Cloudinary-powered image gallery and real-time announcement feed for public visitors.
 - ❓ **FAQ & Feedback System**: Public visitors can view FAQs and submit feedback, while fest admins can add, update, and manage FAQs and review incoming feedback.
@@ -83,6 +87,12 @@
    ```
 
    Open [http://localhost:3000](http://localhost:3000) in your browser.
+
+5. **(Optional) Seed Test Data**:
+   Populate realistic demo teams, items, participants, and results for local testing:
+   ```bash
+   npm run seed
+   ```
 
 ---
 
