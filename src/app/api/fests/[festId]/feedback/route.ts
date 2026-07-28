@@ -4,37 +4,38 @@ import { authOptions } from '@/lib/auth';
 import connectDB from '@/lib/db';
 import Feedback from '@/models/Feedback';
 import { getFestPermission } from '@/lib/permissions';
+import { checkRateLimit } from '@/lib/rate-limit';
 
 export async function GET(
   req: NextRequest,
-  { params }: { params: { festId: string } }
+  { params }: { params: Promise<{ festId: string }> }
 ) {
   try {
+    const { festId } = await params;
     const session = await getServerSession(authOptions);
     if (!session || !session.user) {
       return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
     }
 
     await connectDB();
-    const { isOwner } = await getFestPermission(session.user.id, params.festId);
+    const { isOwner } = await getFestPermission(session.user.id, festId);
     if (!isOwner) {
       return NextResponse.json({ error: 'Forbidden: Owner access required' }, { status: 403 });
     }
 
-    const feedbacks = await Feedback.find({ festId: params.festId }).sort({ submittedAt: -1 });
+    const feedbacks = await Feedback.find({ festId }).sort({ submittedAt: -1 });
     return NextResponse.json({ feedbacks }, { status: 200 });
   } catch (error: any) {
     return NextResponse.json({ error: error.message || 'Failed to fetch feedback' }, { status: 500 });
   }
 }
 
-import { checkRateLimit } from '@/lib/rate-limit';
-
 export async function POST(
   req: NextRequest,
-  { params }: { params: { festId: string } }
+  { params }: { params: Promise<{ festId: string }> }
 ) {
   try {
+    const { festId } = await params;
     const ip = req.headers.get('x-forwarded-for') || '127.0.0.1';
     const rateLimit = await checkRateLimit(ip, 'feedback_submit', 5, 60);
 
@@ -51,7 +52,7 @@ export async function POST(
     }
 
     const feedback = await Feedback.create({
-      festId: params.festId,
+      festId,
       name: name ? String(name).trim() : 'Anonymous',
       rating,
       comment: comment ? String(comment).trim() : '',
