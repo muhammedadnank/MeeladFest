@@ -27,5 +27,5 @@ Mongo-backed Rate Limiting (`RateLimit` model + `checkRateLimit`) on `/certifica
 ## ✅ Phase 8 — Certificates Engine (Completed)
 Participation + winner PDF templates (`@react-pdf/renderer`) · Malayalam font support · Public chest number certificate lookup & PDF download.
 
-## 🟡 Phase 9 — Final Polish & Deployment (Next Up)
-Final mobile responsiveness audit · Vercel deployment.
+## ✅ Phase 9 — Final Polish & Deployment (Completed)
+Mobile responsiveness audit · Production build verification (`npm run build`) · Vercel readiness.
