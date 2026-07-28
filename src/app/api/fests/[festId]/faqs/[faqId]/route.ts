@@ -1,16 +1,23 @@
 import { NextRequest, NextResponse } from 'next/server';
+import { getServerSession } from 'next-auth';
+import { authOptions } from '@/lib/auth';
 import connectDB from '@/lib/db';
 import Faq from '@/models/Faq';
 import { getFestPermission } from '@/lib/permissions';
-import { logActivity } from '@/lib/logger';
+import { logActivity } from '@/lib/activity';
 
 export async function PUT(
   req: NextRequest,
   { params }: { params: { festId: string; faqId: string } }
 ) {
   try {
+    const session = await getServerSession(authOptions);
+    if (!session || !session.user) {
+      return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
+    }
+
     await connectDB();
-    const { isOwner, userId } = await getFestPermission(params.festId);
+    const { isOwner, userId, role } = await getFestPermission(session.user.id, params.festId);
     if (!isOwner) {
       return NextResponse.json({ error: 'Forbidden: Owner access required' }, { status: 403 });
     }
@@ -29,7 +36,15 @@ export async function PUT(
     }
 
     if (userId) {
-      await logActivity(params.festId, userId, 'UPDATE_FAQ', `Updated FAQ: ${faq.question}`);
+      await logActivity({
+        festId: params.festId,
+        userId,
+        role: role === 'owner' ? 'owner' : 'subadmin',
+        action: 'UPDATE_FAQ',
+        entityType: 'faq',
+        entityId: faq._id,
+        summary: `Updated FAQ: ${faq.question}`,
+      });
     }
 
     return NextResponse.json({ faq, message: 'FAQ updated successfully' }, { status: 200 });
@@ -43,8 +58,13 @@ export async function DELETE(
   { params }: { params: { festId: string; faqId: string } }
 ) {
   try {
+    const session = await getServerSession(authOptions);
+    if (!session || !session.user) {
+      return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
+    }
+
     await connectDB();
-    const { isOwner, userId } = await getFestPermission(params.festId);
+    const { isOwner, userId, role } = await getFestPermission(session.user.id, params.festId);
     if (!isOwner) {
       return NextResponse.json({ error: 'Forbidden: Owner access required' }, { status: 403 });
     }
@@ -56,7 +76,15 @@ export async function DELETE(
     }
 
     if (userId) {
-      await logActivity(params.festId, userId, 'DELETE_FAQ', `Deleted FAQ: ${faq.question}`);
+      await logActivity({
+        festId: params.festId,
+        userId,
+        role: role === 'owner' ? 'owner' : 'subadmin',
+        action: 'DELETE_FAQ',
+        entityType: 'faq',
+        entityId: faq._id,
+        summary: `Deleted FAQ: ${faq.question}`,
+      });
     }
 
     return NextResponse.json({ message: 'FAQ deleted successfully' }, { status: 200 });
@@ -64,3 +92,4 @@ export async function DELETE(
     return NextResponse.json({ error: error.message || 'Failed to delete FAQ' }, { status: 500 });
   }
 }
+
