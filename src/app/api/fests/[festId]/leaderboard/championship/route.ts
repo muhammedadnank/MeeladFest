@@ -3,6 +3,8 @@ import connectDB from '@/lib/db';
 import Fest from '@/models/Fest';
 import Result from '@/models/Result';
 import Participant from '@/models/Participant';
+import Team from '@/models/Team';
+import Category from '@/models/Category';
 
 import { getFestBySlugOrId } from '@/lib/getFest';
 

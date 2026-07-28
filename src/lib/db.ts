@@ -1,5 +1,24 @@
 import mongoose from 'mongoose';
 
+// Import all models to ensure Mongoose schemas are registered for serverless populate queries
+import '@/models/Fest';
+import '@/models/Category';
+import '@/models/Team';
+import '@/models/Item';
+import '@/models/Participant';
+import '@/models/GroupEntry';
+import '@/models/Result';
+import '@/models/Program';
+import '@/models/Update';
+import '@/models/Faq';
+import '@/models/Gallery';
+import '@/models/Feedback';
+import '@/models/ActivityLog';
+import '@/models/FestAdmin';
+import '@/models/PasswordReset';
+import '@/models/RateLimit';
+import '@/models/User';
+
 const MONGODB_URI = process.env.MONGODB_URI || 'mongodb://localhost:27017/meeladfest';
 
 if (!MONGODB_URI) {

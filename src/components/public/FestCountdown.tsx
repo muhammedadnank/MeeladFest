@@ -8,21 +8,6 @@ interface FestCountdownProps {
   festName: string;
 }
 
-export default function FestCountdown({ targetDate, festName }: FestCountdownProps) {
-  const [timeLeft, setTimeLeft] = useState<{
-    days: number;
-    hours: number;
-    minutes: number;
-    seconds: number;
-    isPast: boolean;
-  }>({
-    days: 0,
-    hours: 0,
-    minutes: 0,
-    seconds: 0,
-    isPast: false,
-  });
-
 function parseTargetTimestamp(dateStr?: string): number | null {
   if (!dateStr || !dateStr.trim()) return null;
   const str = dateStr.trim();
@@ -87,7 +72,7 @@ export default function FestCountdown({ targetDate, festName }: FestCountdownPro
     return () => clearInterval(interval);
   }, [targetDate]);
 
-  if (!targetDate) {
+  if (!targetDate || timeLeft.invalid) {
     return (
       <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full text-xs font-medium bg-emerald-500/10 text-emerald-400 border border-emerald-500/20">
         <Sparkles className="w-4 h-4" />
