@@ -1,36 +1,122 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# 🌙 MeeladFest
 
-## Getting Started
+> **Multi-Tenant Madrasa Fest Management Platform**  
+> A modern, serverless Next.js web application empowering madrasas across Kerala to seamlessly organize, manage, and showcase their annual Meelad Fest (Arts & Cultural Competition) with live leaderboards, granular sub-admin access, audit logs, and self-service PDF certificates.
 
-First, run the development server:
+---
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+## 🌟 Key Features
+
+- ** Multi-Tenant Fest Hosting**: Any madrasa ustad/admin can register and instantly create a custom fest page with a unique URL slug (`/fests/your-fest-slug`).
+- ** Granular Sub-Admin Permissions**: Fest owners can invite sub-admins (ustads) with custom permission toggles (`participants`, `results`, `updates`, `gallery`) and full activity auditing (`activity_log`).
+- ** No-Public-Registration Data Entry**: Admin/Sub-admin streamlined data entry for single and group items with Chest Number / Fest ID tracking and team capacity validation (`maxParticipantsPerTeam`).
+- ** Live Leaderboard & Championship**:
+  - **Team Leaderboard**: Real-time category-wise and overall team point aggregation with standard tie handling.
+  - **Individual Championship**: Single competition points tracking per participant.
+- ** Self-Service PDF Certificates**: Fast `@react-pdf/renderer` PDF generation with embedded Malayalam typography (Noto Sans Malayalam). Visitors enter their Chest No to download participation and winner certificates without needing an account.
+- ** Live Feed & Gallery**: Cloudinary-powered image gallery and real-time announcement feed for public visitors.
+- ** Soft-Delete Safeguards**: Fest deletion and sub-admin access revocation are soft-deletes—no historical data or audit logs are ever permanently lost.
+
+---
+
+## 🛠️ Tech Stack
+
+| Component | Technology |
+|---|---|
+| **Framework** | Next.js 14 (App Router) & TypeScript |
+| **Styling** | Tailwind CSS |
+| **Database** | MongoDB Atlas (M0 Free Tier) & Mongoose ORM |
+| **Authentication** | NextAuth.js (Credentials Provider, JWT Session Strategy, bcrypt) |
+| **Email Service** | Resend API |
+| **Image Storage** | Cloudinary (Signed Uploads) |
+| **PDF Generation** | `@react-pdf/renderer` (Serverless-friendly) |
+| **Deployment** | Vercel |
+
+---
+
+## 🚀 Getting Started
+
+### Prerequisites
+
+- Node.js 18+ and npm / yarn / pnpm / bun
+- MongoDB Atlas Database URI
+- Cloudinary Cloud Name, API Key, and API Secret
+- Resend API Key
+
+### Installation
+
+1. **Clone the repository**:
+   ```bash
+   git clone https://github.com/muhammedadnank/MeeladFest.git
+   cd MeeladFest
+   ```
+
+2. **Install dependencies**:
+   ```bash
+   npm install
+   ```
+
+3. **Configure Environment Variables**:
+   Create a `.env.local` file in the root directory:
+   ```env
+   # Database
+   MONGODB_URI=mongodb+srv://<username>:<password>@<cluster>.mongodb.net/meeladfest?retryWrites=true&w=majority
+
+   # NextAuth
+   NEXTAUTH_SECRET=your_super_secret_jwt_key
+   NEXTAUTH_URL=http://localhost:3000
+
+   # Resend (Email Service)
+   RESEND_API_KEY=re_xxxxxxxxxxxxxxxxx
+
+   # Cloudinary (Media Uploads)
+   CLOUDINARY_CLOUD_NAME=your_cloud_name
+   CLOUDINARY_API_KEY=your_api_key
+   CLOUDINARY_API_SECRET=your_api_secret
+   ```
+
+4. **Run the Development Server**:
+   ```bash
+   npm run dev
+   ```
+
+   Open [http://localhost:3000](http://localhost:3000) in your browser.
+
+---
+
+## 📁 Project Structure
+
+```
+MeeladFest/
+├── PRD.md                   # Product Requirements Document
+├── TRD.md                   # Technical Requirements Document
+├── DB-Schema.md             # MongoDB Schema & Indexing Specifications
+├── Implementation-Plan.md  # Phased Development Execution Plan
+├── CHANGELOG.md             # Version Release History
+├── public/                  # Static Public Assets
+└── src/
+    ├── app/                 # Next.js 14 App Router Pages & API Endpoints
+    │   ├── (auth)/          # Authentication Pages (Login & Register)
+    │   ├── api/             # REST API Routes (fests, auth, subadmins)
+    │   └── dashboard/       # Administrative Control Center
+    ├── components/          # Reusable UI Components & Providers
+    ├── lib/                 # Core Helpers (DB, Auth, Permissions, Activity Logging)
+    ├── models/              # Mongoose Data Models (16 Collections)
+    └── types/               # TypeScript Type Definitions
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+---
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## 📖 Documentation & Architecture
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+- 📄 [Product Requirements Document (PRD)](PRD.md)
+- ⚙️ [Technical Requirements Document (TRD)](TRD.md)
+- 🗄️ [Database Schema & Indexing Specifications](DB-Schema.md)
+- 🗺️ [Implementation Plan](Implementation-Plan.md)
+- 📜 [Changelog](CHANGELOG.md)
 
-## Learn More
+---
 
-To learn more about Next.js, take a look at the following resources:
+## 📜 License
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+This project is open-source under the MIT License.
