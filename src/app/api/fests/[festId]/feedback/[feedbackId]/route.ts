@@ -7,23 +7,24 @@ import { getFestPermission } from '@/lib/permissions';
 
 export async function DELETE(
   req: NextRequest,
-  { params }: { params: { festId: string; feedbackId: string } }
+  { params }: { params: Promise<{ festId: string; feedbackId: string }> }
 ) {
   try {
+    const { festId, feedbackId } = await params;
     const session = await getServerSession(authOptions);
     if (!session || !session.user) {
       return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
     }
 
     await connectDB();
-    const { isOwner } = await getFestPermission(session.user.id, params.festId);
+    const { isOwner } = await getFestPermission(session.user.id, festId);
     if (!isOwner) {
       return NextResponse.json({ error: 'Forbidden: Owner access required' }, { status: 403 });
     }
 
     const feedback = await Feedback.findOneAndDelete({
-      _id: params.feedbackId,
-      festId: params.festId,
+      _id: feedbackId,
+      festId,
     });
 
     if (!feedback) {
