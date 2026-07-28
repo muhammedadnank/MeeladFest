@@ -1,5 +1,7 @@
 import { notFound } from 'next/navigation';
 import Link from 'next/link';
+import { getServerSession } from 'next-auth';
+import { authOptions } from '@/lib/auth';
 import connectDB from '@/lib/db';
 import Fest from '@/models/Fest';
 import Team from '@/models/Team';
@@ -23,8 +25,9 @@ export default async function FestDashboardOverviewPage({ params }: PageProps) {
     notFound();
   }
 
+  const session = await getServerSession(authOptions);
   const { isOwner, canManageParticipants, canManageResults, canManageUpdates, canManageGallery } =
-    await getFestPermission(festId);
+    await getFestPermission(session?.user?.id, festId);
 
   const [teamsCount, itemsCount, participantsCount, resultsCount] = await Promise.all([
     Team.countDocuments({ festId }),
