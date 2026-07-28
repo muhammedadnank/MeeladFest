@@ -1,13 +1,18 @@
 import React from 'react';
-import { Document, Page, Text, View, StyleSheet } from '@react-pdf/renderer';
+import { Document, Page, Text, View, StyleSheet, Font } from '@react-pdf/renderer';
 import { CertificateData } from '@/types/certificate';
+
+Font.register({
+  family: 'NotoSansMalayalam',
+  src: 'https://cdn.jsdelivr.net/fontsource/fonts/noto-sans-malayalam@latest/400-normal.ttf',
+});
 
 const styles = StyleSheet.create({
   page: {
     flexDirection: 'column',
     backgroundColor: '#FFFFFF',
     padding: 30,
-    fontFamily: 'Helvetica',
+    fontFamily: 'NotoSansMalayalam',
   },
   outerBorder: {
     borderWidth: 4,

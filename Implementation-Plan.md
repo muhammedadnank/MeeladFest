@@ -24,8 +24,8 @@ Public live updates feed & admin UI · Public photo gallery & admin UI · Public
 ## ✅ Phase 7 — Security, Rate-Limiting & Audit Log (Completed)
 Mongo-backed Rate Limiting (`RateLimit` model + `checkRateLimit`) on `/certificates/lookup` and `/feedback` · Owner Activity Log Audit Trail UI (`/dashboard/fests/[festId]/activity-log`).
 
-## 🟡 Phase 8 — Certificates Engine (Next Up)
+## ✅ Phase 8 — Certificates Engine (Completed)
 Participation + winner PDF templates (`@react-pdf/renderer`) · Malayalam font support · Public chest number certificate lookup & PDF download.
 
-## ⚪ Phase 9 — Final Polish & Deployment
+## 🟡 Phase 9 — Final Polish & Deployment (Next Up)
 Final mobile responsiveness audit · Vercel deployment.
