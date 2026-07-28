@@ -8,11 +8,12 @@ import { logActivity } from '@/lib/activity';
 
 export async function GET(
   req: NextRequest,
-  { params }: { params: { festId: string } }
+  { params }: { params: Promise<{ festId: string }> }
 ) {
   try {
+    const { festId } = await params;
     await connectDB();
-    const faqs = await Faq.find({ festId: params.festId }).sort({ order: 1, createdAt: 1 });
+    const faqs = await Faq.find({ festId }).sort({ order: 1, createdAt: 1 });
     return NextResponse.json({ faqs }, { status: 200 });
   } catch (error: any) {
     return NextResponse.json({ error: error.message || 'Failed to fetch FAQs' }, { status: 500 });
@@ -21,16 +22,17 @@ export async function GET(
 
 export async function POST(
   req: NextRequest,
-  { params }: { params: { festId: string } }
+  { params }: { params: Promise<{ festId: string }> }
 ) {
   try {
+    const { festId } = await params;
     const session = await getServerSession(authOptions);
     if (!session || !session.user) {
       return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
     }
 
     await connectDB();
-    const { isOwner, userId, role } = await getFestPermission(session.user.id, params.festId);
+    const { isOwner, userId, role } = await getFestPermission(session.user.id, festId);
     if (!isOwner) {
       return NextResponse.json({ error: 'Forbidden: Owner access required' }, { status: 403 });
     }
@@ -43,7 +45,7 @@ export async function POST(
     }
 
     const faq = await Faq.create({
-      festId: params.festId,
+      festId,
       question,
       answer,
       order: order ?? 0,
@@ -51,7 +53,7 @@ export async function POST(
 
     if (userId) {
       await logActivity({
-        festId: params.festId,
+        festId,
         userId,
         role: role === 'owner' ? 'owner' : 'subadmin',
         action: 'CREATE_FAQ',
@@ -66,4 +68,3 @@ export async function POST(
     return NextResponse.json({ error: error.message || 'Failed to create FAQ' }, { status: 500 });
   }
 }
-
