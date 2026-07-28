@@ -1,8 +1,10 @@
 import { NextRequest, NextResponse } from 'next/server';
+import { getServerSession } from 'next-auth';
+import { authOptions } from '@/lib/auth';
 import connectDB from '@/lib/db';
 import Faq from '@/models/Faq';
 import { getFestPermission } from '@/lib/permissions';
-import { logActivity } from '@/lib/logger';
+import { logActivity } from '@/lib/activity';
 
 export async function GET(
   req: NextRequest,
@@ -22,8 +24,13 @@ export async function POST(
   { params }: { params: { festId: string } }
 ) {
   try {
+    const session = await getServerSession(authOptions);
+    if (!session || !session.user) {
+      return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
+    }
+
     await connectDB();
-    const { isOwner, userId } = await getFestPermission(params.festId);
+    const { isOwner, userId, role } = await getFestPermission(session.user.id, params.festId);
     if (!isOwner) {
       return NextResponse.json({ error: 'Forbidden: Owner access required' }, { status: 403 });
     }
@@ -43,7 +50,15 @@ export async function POST(
     });
 
     if (userId) {
-      await logActivity(params.festId, userId, 'CREATE_FAQ', `Created FAQ: ${question}`);
+      await logActivity({
+        festId: params.festId,
+        userId,
+        role: role === 'owner' ? 'owner' : 'subadmin',
+        action: 'CREATE_FAQ',
+        entityType: 'faq',
+        entityId: faq._id,
+        summary: `Created FAQ: ${question}`,
+      });
     }
 
     return NextResponse.json({ faq, message: 'FAQ created successfully' }, { status: 201 });
@@ -51,3 +66,4 @@ export async function POST(
     return NextResponse.json({ error: error.message || 'Failed to create FAQ' }, { status: 500 });
   }
 }
+
