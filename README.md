@@ -92,7 +92,8 @@ MeeladFest/
 ├── TRD.md                   # Technical Requirements Document
 ├── DB-Schema.md             # MongoDB Schema & Indexing Specifications
 ├── Implementation-Plan.md  # Phased Development Execution Plan
-├── CHANGELOG.md             # Version Release History
+├── CHANGELOG.md             # Main Changelog Index
+├── changelogs/              # Version Release Notes (v0.1.0.md, etc.)
 ├── public/                  # Static Public Assets
 └── src/
     ├── app/                 # Next.js 14 App Router Pages & API Endpoints
@@ -113,7 +114,7 @@ MeeladFest/
 - ⚙️ [Technical Requirements Document (TRD)](TRD.md)
 - 🗄️ [Database Schema & Indexing Specifications](DB-Schema.md)
 - 🗺️ [Implementation Plan](Implementation-Plan.md)
-- 📜 [Changelog](CHANGELOG.md)
+- 📜 [Changelog Index](CHANGELOG.md) ([v0.1.0 Release Notes](changelogs/v0.1.0.md))
 
 ---
 
