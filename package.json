@@ -1,0 +1,36 @@
+{
+  "name": "meeladfest_temp",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "eslint"
+  },
+  "dependencies": {
+    "@react-pdf/renderer": "^4.5.1",
+    "bcryptjs": "^3.0.3",
+    "cloudinary": "^2.10.0",
+    "clsx": "^2.1.1",
+    "lucide-react": "^1.27.0",
+    "mongoose": "^9.8.1",
+    "next": "16.2.12",
+    "next-auth": "^4.24.15",
+    "react": "19.2.4",
+    "react-dom": "19.2.4",
+    "resend": "^6.18.0",
+    "tailwind-merge": "^3.6.0"
+  },
+  "devDependencies": {
+    "@tailwindcss/postcss": "^4",
+    "@types/bcryptjs": "^2.4.6",
+    "@types/node": "^20",
+    "@types/react": "^19",
+    "@types/react-dom": "^19",
+    "eslint": "^9",
+    "eslint-config-next": "16.2.12",
+    "tailwindcss": "^4",
+    "typescript": "^5"
+  }
+}
