@@ -5,7 +5,7 @@ export interface IActivityLog extends Document {
   userId: mongoose.Types.ObjectId;
   role: 'owner' | 'subadmin';
   action: string; // e.g. 'participant.create', 'participant.update', 'result.create'
-  entityType: 'participant' | 'group_entry' | 'result' | 'update' | 'gallery';
+  entityType: 'participant' | 'group_entry' | 'result' | 'update' | 'gallery' | 'faq' | 'feedback';
   entityId?: mongoose.Types.ObjectId;
   summary: string;
   createdAt: Date;
@@ -19,7 +19,7 @@ const ActivityLogSchema: Schema<IActivityLog> = new Schema(
     action: { type: String, required: true, trim: true },
     entityType: {
       type: String,
-      enum: ['participant', 'group_entry', 'result', 'update', 'gallery'],
+      enum: ['participant', 'group_entry', 'result', 'update', 'gallery', 'faq', 'feedback'],
       required: true,
     },
     entityId: { type: Schema.Types.ObjectId },
