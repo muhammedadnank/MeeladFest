@@ -27,6 +27,7 @@ function parseTargetTimestamp(dateStr?: string): number | null {
 }
 
 export default function FestCountdown({ targetDate, festName }: FestCountdownProps) {
+  const [mounted, setMounted] = useState(false);
   const [timeLeft, setTimeLeft] = useState<{
     days: number;
     hours: number;
@@ -44,6 +45,7 @@ export default function FestCountdown({ targetDate, festName }: FestCountdownPro
   });
 
   useEffect(() => {
+    setMounted(true);
     const targetTimestamp = parseTargetTimestamp(targetDate);
     if (!targetTimestamp) {
       setTimeLeft({ days: 0, hours: 0, minutes: 0, seconds: 0, isPast: false, invalid: true });
@@ -71,6 +73,10 @@ export default function FestCountdown({ targetDate, festName }: FestCountdownPro
     const interval = setInterval(calculateTimeLeft, 1000);
     return () => clearInterval(interval);
   }, [targetDate]);
+
+  if (!mounted) {
+    return null;
+  }
 
   if (!targetDate || timeLeft.invalid) {
     return (

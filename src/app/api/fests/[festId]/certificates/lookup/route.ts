@@ -54,7 +54,7 @@ export async function GET(
     }).populate('itemId').populate('teamId');
 
     if (!singleParticipant && groupEntries.length === 0) {
-      return NextResponse.json({ error: 'No participant or group entry found with this Chest Number' }, { status: 404 });
+      return NextResponse.json({ success: false, error: 'No participant or group entry found with this Chest Number' }, { status: 200 });
     }
 
     const certificates: CertificateData[] = [];

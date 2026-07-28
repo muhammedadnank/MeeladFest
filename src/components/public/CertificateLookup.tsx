@@ -27,7 +27,7 @@ export const CertificateLookup: React.FC<CertificateLookupProps> = ({ festId }) 
       const res = await fetch(`/api/fests/${festId}/certificates/lookup?chestNo=${encodeURIComponent(chestNo.trim())}`);
       const data = await res.json();
 
-      if (!res.ok) {
+      if (!res.ok || data.error || !data.success) {
         throw new Error(data.error || 'No certificates found for this Chest Number');
       }
 
