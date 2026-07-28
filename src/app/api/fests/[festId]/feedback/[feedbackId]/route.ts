@@ -1,4 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
+import { getServerSession } from 'next-auth';
+import { authOptions } from '@/lib/auth';
 import connectDB from '@/lib/db';
 import Feedback from '@/models/Feedback';
 import { getFestPermission } from '@/lib/permissions';
@@ -8,8 +10,13 @@ export async function DELETE(
   { params }: { params: { festId: string; feedbackId: string } }
 ) {
   try {
+    const session = await getServerSession(authOptions);
+    if (!session || !session.user) {
+      return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
+    }
+
     await connectDB();
-    const { isOwner } = await getFestPermission(params.festId);
+    const { isOwner } = await getFestPermission(session.user.id, params.festId);
     if (!isOwner) {
       return NextResponse.json({ error: 'Forbidden: Owner access required' }, { status: 403 });
     }
