@@ -1,20 +1,22 @@
 import type { Metadata } from 'next';
-import { Geist, Geist_Mono } from 'next/font/google';
+import { Amiri, Inter } from 'next/font/google';
 import './globals.css';
 import AuthProvider from '@/components/providers/AuthProvider';
 
-const geistSans = Geist({
-  variable: '--font-geist-sans',
-  subsets: ['latin'],
+const amiri = Amiri({
+  subsets: ['arabic', 'latin'],
+  weight: ['400', '700'],
+  variable: '--font-amiri',
 });
 
-const geistMono = Geist_Mono({
-  variable: '--font-geist-mono',
+const inter = Inter({
   subsets: ['latin'],
+  weight: ['300', '400', '500', '600', '700'],
+  variable: '--font-inter',
 });
 
 export const metadata: Metadata = {
-  title: 'MeeladFest - Festival Management Platform',
+  title: 'MeeladFest - Multi-Tenant Madrasa Fest Management Platform',
   description: 'Manage Meelad Fest competitions, participants, live results, updates, and certificates.',
 };
 
@@ -26,11 +28,12 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
+      className={`${amiri.variable} ${inter.variable} h-full antialiased`}
     >
-      <body className="min-h-full flex flex-col bg-slate-950 text-slate-100">
+      <body className="min-h-full flex flex-col bg-cream text-text-dark font-inter">
         <AuthProvider>{children}</AuthProvider>
       </body>
     </html>
   );
 }
+
