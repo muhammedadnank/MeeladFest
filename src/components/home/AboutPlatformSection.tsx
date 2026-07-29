@@ -2,6 +2,13 @@ import { SectionTitle } from '@/components/ui/SectionTitle';
 import { Sparkles, HeartHandshake, Zap, Compass, CheckCircle2 } from 'lucide-react';
 
 export function AboutPlatformSection() {
+  const stats = [
+    { label: 'ചെലവ് (Platform Cost)', value: '₹0 (100% Free)' },
+    { label: 'വെരിഫിക്കേഷൻ (Verification)', value: 'Instant QR' },
+    { label: 'അപ്‌ഡേഷൻ (Live Updates)', value: 'Real-time' },
+    { label: 'ഇന്റർഫേസ് (Device Support)', value: 'Mobile First' },
+  ];
+
   const highlights = [
     {
       title: '100% സൗജന്യ സേവനം (Zero Cost Platform)',
@@ -22,7 +29,7 @@ export function AboutPlatformSection() {
   ];
 
   return (
-    <section className="py-12 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto w-full">
+    <section id="about-platform" className="py-12 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto w-full">
       <div className="bg-white border border-border-warm rounded-3xl p-6 sm:p-10 shadow-sm relative overflow-hidden">
         {/* Top Gold Geometric Accent */}
         <div className="absolute top-0 right-0 w-40 h-40 bg-gold-500/5 rounded-bl-full pointer-events-none" />
@@ -45,13 +52,35 @@ export function AboutPlatformSection() {
               കേരളത്തിലുടനീളമുള്ള സമസ്ത മദ്‌റസകൾക്കും പ്രദേശിക ഇസ്‌ലാമിക് ഫെസ്റ്റിവലുകൾക്കും ഡിജിറ്റൽ സാങ്കേതികവിദ്യയുടെ എല്ലാ സൗകര്യങ്ങളും ലഭ്യമാക്കുക എന്ന ലക്ഷ്യത്തോടെയാണ് <strong className="font-semibold text-emerald-900">MeeladFest</strong> രൂപകൽപ്പന ചെയ്തിരിക്കുന്നത്.
             </p>
 
-            <div className="p-4 rounded-2xl bg-gradient-to-r from-cream to-amber-50/50 border border-gold-500/30 flex items-center gap-3">
-              <div className="w-10 h-10 rounded-xl bg-gold-500/20 text-gold-700 flex items-center justify-center shrink-0">
-                <Sparkles className="w-5 h-5 text-gold-600" />
+            {/* Impact Metric Chips */}
+            <div className="grid grid-cols-2 gap-2 pt-1">
+              {stats.map((stat, idx) => (
+                <div key={idx} className="p-2.5 rounded-xl bg-emerald-50/60 border border-emerald-100 text-center">
+                  <div className="text-xs font-bold text-emerald-950">{stat.value}</div>
+                  <div className="text-[10px] text-emerald-800/70 font-medium">{stat.label}</div>
+                </div>
+              ))}
+            </div>
+
+            <div className="p-4 rounded-2xl bg-gradient-to-r from-cream to-amber-50/50 border border-gold-500/30 flex items-center justify-between gap-3">
+              <div className="flex items-center gap-3">
+                <div className="w-10 h-10 rounded-xl bg-gold-500/20 text-gold-700 flex items-center justify-center shrink-0">
+                  <Sparkles className="w-5 h-5 text-gold-600" />
+                </div>
+                <p className="text-xs text-emerald-950 font-medium leading-normal">
+                  മാനുവൽ പേപ്പർ വർക്കുകൾ ഒഴിവാക്കി കൂടുതൽ എളുപ്പത്തിൽ റിസൾട്ടുകൾ പ്രസിദ്ധീകരിക്കാം.
+                </p>
               </div>
-              <p className="text-xs text-emerald-950 font-medium leading-normal">
-                മാനുവൽ പേപ്പർ വർക്കുകൾ ഒഴിവാക്കി അഡ്മിൻമാർക്കും കാണികൾക്കും ഒരേപോലെ സുഗമമായ കലോത്സവ അനുഭവം നൽകുന്നു.
-              </p>
+            </div>
+
+            <div className="pt-2">
+              <a
+                href="/about"
+                className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-emerald-950 hover:bg-emerald-900 text-gold-200 text-xs font-bold transition-all shadow-sm border border-gold-500/30 group"
+              >
+                <span>കൂടുതൽ വിവരങ്ങൾ വായിക്കുക (Read Full About)</span>
+                <span className="group-hover:translate-x-1 transition-transform">→</span>
+              </a>
             </div>
           </div>
 
