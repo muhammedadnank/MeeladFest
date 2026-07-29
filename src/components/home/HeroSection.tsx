@@ -23,19 +23,19 @@ export function HeroSection() {
         {/* Badge */}
         <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full text-xs font-semibold bg-emerald-900/80 border border-gold-500/40 text-gold-200 mb-6 shadow-md backdrop-blur-sm">
           <Trophy className="w-4 h-4 text-gold-500 animate-bounce" />
-          <span>കേരള മദ്‌റസാ മീലാദ് കലോത്സവ ഡിജിറ്റൽ വേദികൾ</span>
+          <span>Kerala Madrasa Meelad Fest Digital Portal</span>
           <span>۞</span>
         </div>
 
         {/* Title */}
         <h1 className="font-amiri font-bold text-3xl sm:text-5xl lg:text-6xl text-white leading-tight mb-4 tracking-wide">
-          Meelad Fest Live Point Table & <br className="hidden sm:inline" />
-          <span className="text-gold-200 drop-shadow-sm">ഡിജിറ്റൽ മത്സര റിസൾട്ടുകൾ</span>
+          MeeladFest Live Point Table & <br className="hidden sm:inline" />
+          <span className="text-gold-200 drop-shadow-sm">Digital Competition Results</span>
         </h1>
 
         {/* Subtitle */}
         <p className="text-xs sm:text-base text-emerald-100/90 max-w-2xl mx-auto leading-relaxed mb-8 font-light">
-          മദ്‌റസാ മീലാദ് കലോത്സവങ്ങളുടെ ലൈവ് പോയിന്റ് നില, വ്യക്തിഗത ചാമ്പ്യൻഷിപ്പ് സ്കോറുകൾ, സ്റ്റേജ് ഷെഡ്യൂളുകൾ, ഡിജിറ്റൽ സർട്ടിഫിക്കറ്റുകൾ എന്നിവ തത്സമയം ലഭ്യമാക്കുന്ന ഏകീകൃത പ്ലാറ്റ്‌ഫോം.
+          Unified digital portal for real-time Meelad Fest point tables, individual championship scores, stage schedules, and digital certificates.
         </p>
 
         {/* CTAs */}
@@ -44,7 +44,7 @@ export function HeroSection() {
             href="#active-fests"
             className="w-full sm:w-auto bg-gold-500 text-emerald-950 px-7 py-3.5 rounded-xl text-xs sm:text-sm font-extrabold hover:bg-amber-400 transition-all shadow-xl hover:shadow-gold/20 flex items-center justify-center gap-2 transform hover:-translate-y-0.5"
           >
-            <span>കലോത്സവങ്ങൾ കാണുക (Browse Fests)</span>
+            <span>Browse Festivals</span>
             <ArrowRight className="w-4 h-4" />
           </a>
 
@@ -53,7 +53,7 @@ export function HeroSection() {
             className="w-full sm:w-auto bg-emerald-900/70 text-white border border-emerald-600/50 px-6 py-3.5 rounded-xl text-xs sm:text-sm font-semibold hover:bg-emerald-800 transition-colors flex items-center justify-center gap-2"
           >
             <ShieldCheck className="w-4 h-4 text-gold-200" />
-            <span>അഡ്മിൻ പോർട്ടൽ (Admin Portal)</span>
+            <span>Admin Portal</span>
           </Link>
         </div>
 

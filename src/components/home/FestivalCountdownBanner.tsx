@@ -103,7 +103,7 @@ export function FestivalCountdownBanner({ fests }: FestivalCountdownBannerProps)
               <Sparkles className="w-3.5 h-3.5 text-gold-500 animate-pulse" />
               <span className="font-amiri text-sm font-bold text-gold-200">۞ مَهْرَجَانُ الْمِيلَاد ۞</span>
               <span className="hidden sm:inline text-emerald-300/60">•</span>
-              <span className="hidden sm:inline">കൗണ്ട്‌ഡൗൺ ടൈമർ (Festival Spotlight)</span>
+              <span className="hidden sm:inline">Festival Spotlight</span>
             </div>
 
             <h2 className="text-2xl sm:text-4xl font-amiri font-bold tracking-wide text-gold-200 drop-shadow-md">
@@ -155,15 +155,15 @@ export function FestivalCountdownBanner({ fests }: FestivalCountdownBannerProps)
             <div className="flex items-center gap-2 text-xs text-gold-200 font-semibold uppercase tracking-wider mb-3">
               <span className="font-amiri text-sm text-gold-500">۞</span>
               <Clock className="w-4 h-4 text-gold-500 animate-spin-slow" />
-              <span>{timeLeft.isPast ? 'മത്സരം ആരംഭിച്ചു' : 'കൗണ്ട്‌ഡൗൺ (Starts In)'}</span>
+              <span>{timeLeft.isPast ? 'Festival Live' : 'Countdown Spotlight'}</span>
               <span className="font-amiri text-sm text-gold-500">۞</span>
             </div>
 
             {mounted && timeLeft.isPast ? (
               <div className="bg-emerald-900/90 border border-gold-500/50 rounded-2xl p-6 text-center max-w-sm shadow-lg">
                 <Trophy className="w-10 h-10 text-gold-500 mx-auto mb-2 animate-bounce" />
-                <h3 className="text-lg font-amiri font-bold text-gold-200">ഫെസ്റ്റിവൽ പുരോഗമിക്കുന്നു!</h3>
-                <p className="text-xs text-emerald-100/80 mt-1">തത്സമയ പോയിന്റ് നിലകളും റിസൾട്ടുകളും കാണുക.</p>
+                <h3 className="text-lg font-amiri font-bold text-gold-200">Festival Is Live!</h3>
+                <p className="text-xs text-emerald-100/80 mt-1">View real-time point tables & competition results.</p>
               </div>
             ) : (
               <div className="grid grid-cols-4 gap-2 sm:gap-3 text-center">
@@ -172,7 +172,7 @@ export function FestivalCountdownBanner({ fests }: FestivalCountdownBannerProps)
                     {mounted ? String(timeLeft.days).padStart(2, '0') : '00'}
                   </div>
                   <div className="text-[10px] sm:text-xs text-emerald-200 font-bold uppercase tracking-wider mt-1">
-                    ദിവസം
+                    Days
                   </div>
                   <div className="text-[9px] text-emerald-300/60 font-amiri">أيام</div>
                 </div>
@@ -182,7 +182,7 @@ export function FestivalCountdownBanner({ fests }: FestivalCountdownBannerProps)
                     {mounted ? String(timeLeft.hours).padStart(2, '0') : '00'}
                   </div>
                   <div className="text-[10px] sm:text-xs text-emerald-200 font-bold uppercase tracking-wider mt-1">
-                    മണിക്കൂർ
+                    Hours
                   </div>
                   <div className="text-[9px] text-emerald-300/60 font-amiri">ساعات</div>
                 </div>
@@ -192,7 +192,7 @@ export function FestivalCountdownBanner({ fests }: FestivalCountdownBannerProps)
                     {mounted ? String(timeLeft.minutes).padStart(2, '0') : '00'}
                   </div>
                   <div className="text-[10px] sm:text-xs text-emerald-200 font-bold uppercase tracking-wider mt-1">
-                    മിനിറ്റ്
+                    Minutes
                   </div>
                   <div className="text-[9px] text-emerald-300/60 font-amiri">دقائق</div>
                 </div>
@@ -202,7 +202,7 @@ export function FestivalCountdownBanner({ fests }: FestivalCountdownBannerProps)
                     {mounted ? String(timeLeft.seconds).padStart(2, '0') : '00'}
                   </div>
                   <div className="text-[10px] sm:text-xs text-emerald-200 font-bold uppercase tracking-wider mt-1">
-                    സെക്കൻഡ്
+                    Seconds
                   </div>
                   <div className="text-[9px] text-emerald-300/60 font-amiri">ثواني</div>
                 </div>
@@ -215,7 +215,7 @@ export function FestivalCountdownBanner({ fests }: FestivalCountdownBannerProps)
                 href={`/fests/${currentFest.slug}`}
                 className="mt-6 inline-flex items-center gap-2 bg-gold-500 hover:bg-amber-400 text-emerald-950 font-extrabold text-xs sm:text-sm px-6 py-3 rounded-xl transition-all shadow-xl hover:shadow-gold/20 transform hover:-translate-y-0.5"
               >
-                <span>ഷെഡ്യൂളും ലൈവ് പോയിന്റുകളും കാണുക</span>
+                <span>View Schedule & Point Table</span>
                 <ArrowRight className="w-4 h-4" />
               </Link>
             )}

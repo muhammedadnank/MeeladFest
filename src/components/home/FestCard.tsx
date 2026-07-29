@@ -67,7 +67,7 @@ export function FestCard({ fest }: FestCardProps) {
 
       {/* Card Footer CTA */}
       <div className="px-5 py-3.5 bg-gradient-to-r from-emerald-50 to-white border-t border-border-warm flex items-center justify-between text-xs font-bold text-emerald-950 group-hover:text-emerald-800">
-        <span>പോയിന്റ് നിലയും റിസൾട്ടുകളും (Live Results)</span>
+        <span>View Points & Live Results</span>
         <ArrowRight className="w-4 h-4 text-gold-500 group-hover:translate-x-1 transition-transform" />
       </div>
     </Link>
