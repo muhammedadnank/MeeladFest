@@ -2,12 +2,16 @@
 
 import { useState } from 'react';
 import { signIn } from 'next-auth/react';
-import { useRouter } from 'next/navigation';
+import { useRouter, useSearchParams } from 'next/navigation';
 import Link from 'next/link';
-import { LogIn, Sparkles, Loader2, KeyRound, Mail } from 'lucide-react';
+import { LogIn, Loader2, KeyRound, Mail, CheckCircle2 } from 'lucide-react';
+import { GeometricPattern } from '@/components/ui/GeometricPattern';
 
 export default function LoginPage() {
   const router = useRouter();
+  const searchParams = useSearchParams();
+  const registered = searchParams.get('registered');
+
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
@@ -39,62 +43,68 @@ export default function LoginPage() {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center p-4 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-emerald-950 via-slate-950 to-slate-950">
-      <div className="w-full max-w-md">
+    <div className="min-h-screen bg-cream text-text-dark flex items-center justify-center p-4 relative overflow-hidden font-inter">
+      {/* Background Subtle Pattern */}
+      <GeometricPattern className="absolute -top-12 -right-12 w-96 h-96 opacity-[0.04] text-emerald-950 pointer-events-none" />
+      <GeometricPattern className="absolute -bottom-12 -left-12 w-96 h-96 opacity-[0.04] text-emerald-950 pointer-events-none" />
+
+      <div className="w-full max-w-sm relative z-10">
         {/* Logo / Header */}
         <div className="text-center mb-8">
-          <Link href="/" className="inline-flex items-center gap-2 text-3xl font-extrabold tracking-tight">
-            <span className="bg-gradient-to-r from-emerald-400 to-teal-300 bg-clip-text text-transparent">
-              MeeladFest
-            </span>
-            <Sparkles className="w-6 h-6 text-emerald-400 animate-pulse" />
+          <Link href="/" className="inline-flex items-center gap-2 font-amiri text-3xl font-bold text-emerald-950 tracking-wide">
+            <span className="text-gold-500">☽</span> MeeladFest
           </Link>
-          <p className="mt-2 text-sm text-slate-400">
-            Sign in to manage your festivals & teams
+          <p className="mt-1 text-xs text-text-dark/70 font-medium">
+            Admin Sign In to Manage Festivals & Teams
           </p>
         </div>
 
         {/* Card */}
-        <div className="bg-slate-900/80 backdrop-blur-xl border border-slate-800/80 shadow-2xl rounded-2xl p-8">
+        <div className="bg-white border border-border-warm rounded-card shadow-sm p-6 sm:p-8">
+          {registered && (
+            <div className="mb-5 p-3 rounded-lg bg-emerald-50 border border-emerald-200 text-emerald-800 text-xs font-medium flex items-center gap-2">
+              <CheckCircle2 className="w-4 h-4 shrink-0 text-emerald-600" />
+              Account created successfully! Please sign in below.
+            </div>
+          )}
+
           {error && (
-            <div className="mb-6 p-4 rounded-xl bg-rose-500/10 border border-rose-500/20 text-rose-400 text-sm font-medium animate-in fade-in slide-in-from-top-2">
+            <div className="mb-5 p-3 rounded-lg bg-red-50 border border-red-200 text-red-700 text-xs font-medium">
               {error}
             </div>
           )}
 
-          <form onSubmit={handleSubmit} className="space-y-5">
+          <form onSubmit={handleSubmit} className="space-y-4">
             <div>
-              <label className="block text-xs font-semibold uppercase tracking-wider text-slate-400 mb-2">
+              <label className="block text-xs font-semibold uppercase tracking-wider text-text-dark/80 mb-1.5">
                 Email Address
               </label>
               <div className="relative">
-                <Mail className="absolute left-3.5 top-1/2 -translate-y-1/2 w-5 h-5 text-slate-500" />
+                <Mail className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-emerald-800/60" />
                 <input
                   type="email"
                   required
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                   placeholder="admin@example.com"
-                  className="w-full bg-slate-950/80 border border-slate-800 rounded-xl pl-11 pr-4 py-3 text-slate-100 placeholder-slate-600 focus:outline-none focus:ring-2 focus:ring-emerald-500/50 focus:border-emerald-500 transition-all text-sm"
+                  className="w-full bg-cream/30 border border-border-warm rounded-lg pl-10 pr-3.5 py-2.5 text-text-dark placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-emerald-800/20 focus:border-emerald-800 transition-all text-xs"
                 />
               </div>
             </div>
 
             <div>
-              <div className="flex justify-between items-center mb-2">
-                <label className="block text-xs font-semibold uppercase tracking-wider text-slate-400">
-                  Password
-                </label>
-              </div>
+              <label className="block text-xs font-semibold uppercase tracking-wider text-text-dark/80 mb-1.5">
+                Password
+              </label>
               <div className="relative">
-                <KeyRound className="absolute left-3.5 top-1/2 -translate-y-1/2 w-5 h-5 text-slate-500" />
+                <KeyRound className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-emerald-800/60" />
                 <input
                   type="password"
                   required
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
                   placeholder="••••••••"
-                  className="w-full bg-slate-950/80 border border-slate-800 rounded-xl pl-11 pr-4 py-3 text-slate-100 placeholder-slate-600 focus:outline-none focus:ring-2 focus:ring-emerald-500/50 focus:border-emerald-500 transition-all text-sm"
+                  className="w-full bg-cream/30 border border-border-warm rounded-lg pl-10 pr-3.5 py-2.5 text-text-dark placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-emerald-800/20 focus:border-emerald-800 transition-all text-xs"
                 />
               </div>
             </div>
@@ -102,30 +112,30 @@ export default function LoginPage() {
             <button
               type="submit"
               disabled={loading}
-              className="w-full mt-2 py-3 px-4 bg-gradient-to-r from-emerald-500 to-teal-500 hover:from-emerald-400 hover:to-teal-400 text-slate-950 font-bold rounded-xl shadow-lg shadow-emerald-500/20 hover:shadow-emerald-500/30 transition-all flex items-center justify-center gap-2 text-sm disabled:opacity-50 cursor-pointer"
+              className="w-full mt-2 py-2.5 px-4 bg-emerald-800 hover:bg-emerald-950 text-white font-medium rounded-lg shadow-sm transition-colors flex items-center justify-center gap-2 text-xs disabled:opacity-50 cursor-pointer"
             >
               {loading ? (
                 <>
-                  <Loader2 className="w-5 h-5 animate-spin" />
+                  <Loader2 className="w-4 h-4 animate-spin" />
                   Signing in...
                 </>
               ) : (
                 <>
-                  <LogIn className="w-5 h-5" />
+                  <LogIn className="w-4 h-4" />
                   Sign In
                 </>
               )}
             </button>
           </form>
 
-          <div className="mt-8 text-center pt-6 border-t border-slate-800/80">
-            <p className="text-xs text-slate-400">
+          <div className="mt-6 text-center pt-5 border-t border-border-warm">
+            <p className="text-xs text-text-dark/70">
               Don't have an admin account?{' '}
               <Link
                 href="/register"
-                className="font-semibold text-emerald-400 hover:text-emerald-300 transition-colors"
+                className="font-semibold text-emerald-800 hover:underline transition-colors"
               >
-                Create Account
+                Register Here
               </Link>
             </p>
           </div>
@@ -134,3 +144,4 @@ export default function LoginPage() {
     </div>
   );
 }
+

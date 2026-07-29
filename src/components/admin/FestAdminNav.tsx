@@ -61,33 +61,34 @@ export default function FestAdminNav({ festId, slug = '', festName = 'Fest Admin
   ];
 
   return (
-    <div className="bg-slate-900 border-b border-slate-800">
+    <div className="bg-emerald-950 border-b border-emerald-800/60 font-inter">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex flex-wrap items-center justify-between gap-4">
         <div>
-          <div className="text-xs text-emerald-400 font-semibold uppercase tracking-wider mb-0.5">
-            Fest Management Portal
+          <div className="text-[10px] text-gold-500 font-medium uppercase tracking-widest mb-0.5 flex items-center gap-1.5">
+            <span className="w-1.5 h-1.5 rounded-full bg-gold-500"></span>
+            Fest Admin Portal
           </div>
-          <h1 className="text-xl font-bold text-slate-100">{festName}</h1>
+          <h1 className="text-xl font-amiri font-bold text-white tracking-wide">{festName}</h1>
         </div>
 
         <div className="flex items-center gap-3">
           <Link
             href={`/fests/${slug}`}
             target="_blank"
-            className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-slate-800 hover:bg-slate-700 text-slate-300 text-xs font-semibold rounded-lg border border-slate-700 transition"
+            className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-emerald-900/80 hover:bg-emerald-900 text-emerald-100 text-xs font-medium rounded-lg border border-emerald-700/50 transition-colors"
           >
-            Public Page <ExternalLink className="w-3.5 h-3.5 text-emerald-400" />
+            Public Site <ExternalLink className="w-3.5 h-3.5 text-gold-500" />
           </Link>
           <Link
             href="/dashboard"
-            className="px-3 py-1.5 bg-slate-800 hover:bg-slate-700 text-slate-300 text-xs font-semibold rounded-lg border border-slate-700 transition"
+            className="px-3 py-1.5 bg-emerald-900/80 hover:bg-emerald-900 text-emerald-100 text-xs font-medium rounded-lg border border-emerald-700/50 transition-colors"
           >
             Switch Fest
           </Link>
         </div>
       </div>
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center gap-1 overflow-x-auto no-scrollbar py-2 border-t border-slate-800/60">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center gap-1 overflow-x-auto no-scrollbar py-2 border-t border-emerald-900/60">
         {links
           .filter((l) => l.show)
           .map((link) => {
@@ -97,10 +98,10 @@ export default function FestAdminNav({ festId, slug = '', festName = 'Fest Admin
               <Link
                 key={link.href}
                 href={link.href}
-                className={`flex items-center gap-2 px-3 py-2 rounded-lg text-xs font-medium whitespace-nowrap transition ${
+                className={`flex items-center gap-2 px-3 py-2 rounded-lg text-xs font-medium whitespace-nowrap transition-colors ${
                   active
-                    ? 'bg-emerald-500/10 text-emerald-400 border border-emerald-500/20'
-                    : 'text-slate-400 hover:text-slate-200 hover:bg-slate-800/60'
+                    ? 'bg-gold-500 text-emerald-950 font-semibold shadow-sm'
+                    : 'text-emerald-100/70 hover:text-white hover:bg-emerald-900/60'
                 }`}
               >
                 <Icon className="w-3.5 h-3.5" />
@@ -112,3 +113,4 @@ export default function FestAdminNav({ festId, slug = '', festName = 'Fest Admin
     </div>
   );
 }
+
