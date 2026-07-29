@@ -1,10 +1,14 @@
 import Link from 'next/link';
 import { Sparkles, Trophy, ArrowRight, ShieldCheck } from 'lucide-react';
 import { GeometricPattern } from '@/components/ui/GeometricPattern';
+import { ThreeHeroCanvas } from '@/components/ui/ThreeHeroCanvas';
 
 export function HeroSection() {
   return (
     <section className="relative bg-gradient-to-b from-emerald-950 via-emerald-900 to-emerald-950 text-white py-16 sm:py-20 px-4 sm:px-6 lg:px-8 overflow-hidden border-b border-gold-500/20">
+      {/* 3D Interactive Crescent Moon, Star & Stardust Particle Canvas */}
+      <ThreeHeroCanvas />
+
       {/* Signature Islamic Girih Lattice Overlays */}
       <GeometricPattern className="absolute -top-12 -right-12 w-96 h-96 opacity-[0.12] text-gold-500 pointer-events-none" />
       <GeometricPattern className="absolute -bottom-20 -left-20 w-80 h-80 opacity-[0.08] text-emerald-400 pointer-events-none" />
