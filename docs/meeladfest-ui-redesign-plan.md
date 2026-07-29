@@ -469,35 +469,41 @@ export function GeometricPattern({ className = '' }: { className?: string }) {
 
 ---
 
-## 6. File Change Summary
+## 6. Implemented File Inventory
 
-### New files to create
+### UI Primitives (`src/components/ui/`)
+- `GeometricPattern.tsx` — Reusable Islamic Hexagon SVG overlay
+- `LiveBadge.tsx` — Animated green pulse "Live Now" indicator
+- `OfficialChip.tsx` — Gold-tinted "Official Page" chip
+- `SectionTitle.tsx` — Emerald left-bordered heading label
+- `LoadingSkeleton.tsx` — Skeleton UI loaders for cards & leaderboards
+- `EmptyState.tsx` — Styled empty state container
 
-```
-src/
-├── components/
-│   ├── ui/
-│   │   ├── GeometricPattern.tsx   ← NEW
-│   │   ├── LiveBadge.tsx          ← NEW
-│   │   ├── SectionTitle.tsx       ← NEW
-│   │   ├── LoadingSkeleton.tsx    ← NEW
-│   │   └── EmptyState.tsx         ← NEW
-│   ├── home/
-│   │   ├── HeroSection.tsx        ← NEW
-│   │   ├── StatsBar.tsx           ← NEW
-│   │   ├── FestCard.tsx           ← REPLACE
-│   │   └── FeatureGrid.tsx        ← NEW
-│   ├── fest/
-│   │   ├── FestBanner.tsx         ← REPLACE
-│   │   ├── FestTabBar.tsx         ← REPLACE
-│   │   ├── Podium.tsx             ← NEW
-│   │   ├── LeaderboardRow.tsx     ← NEW
-│   │   ├── TeamLeaderboard.tsx    ← REPLACE
-│   │   └── CertificateEngine.tsx  ← REPLACE
-│   └── dashboard/
-│       ├── Sidebar.tsx            ← REPLACE
-│       └── DashboardHeader.tsx    ← REPLACE
-```
+### Homepage Components (`src/components/home/`)
+- `HeroSection.tsx` — Hero banner with Arabic script, CTA buttons, and SVG overlay
+- `StatsBar.tsx` — 3-column stats bar with Arabic numerals & dynamic fest count
+- `FestCard.tsx` — Festival cards with dark emerald gradient tops
+- `FeatureGrid.tsx` — 2×2 platform feature highlights
+
+### Public Fest Portal Components (`src/components/fest/` & `src/components/public/`)
+- `FestBanner.tsx` — Festival header banner with org name and status chips
+- `TabBar.tsx` — Sticky tab navigation bar
+- `Podium.tsx` — 3-column 1st, 2nd, 3rd place podium display
+- `LeaderboardRow.tsx` — Ranked participant/team progress row
+- `PublicLeaderboard.tsx` — Dynamic team leaderboard with live rank updates
+- `PublicChampionshipLeaderboard.tsx` — Individual championship points leaderboard
+- `CertificateLookup.tsx` — Chest-number certificate search & PDF generator
+- `FestCountdown.tsx` — Real-time countdown timer to fest start
+- `PublicPrograms.tsx` — Schedule timeline of festival events
+- `PublicUpdates.tsx` — Feed of real-time festival announcements
+- `PublicGallery.tsx` — Cloudinary image masonry gallery
+- `PublicFaqAccordion.tsx` — Collapsible festival FAQs
+- `PublicFeedbackForm.tsx` — User feedback and rating form
+
+### Dashboard & Layout (`src/components/admin/` & `src/components/layout/`)
+- `FestAdminNav.tsx` — Responsive admin dashboard drawer navigation & top header
+- `Navbar.tsx` — Global public navigation bar
+- `Footer.tsx` — Platform footer with crescent logo & quick links
 
 ### Files to modify
 
