@@ -24,12 +24,14 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 | **`v1.4.0`** | 2026-07-29 | 🟢 Released | Islamic Cultural Aesthetics, Girih Patterns & Arabic Calligraphy | [📄 View v1.4.0 Notes](./changelogs/v1.4.0.md) |
 | **`v1.5.0`** | 2026-07-29 | 🟢 Released | Interactive 3D Three.js Hero Visuals (Crescent Moon, Star & Stardust) | [📄 View v1.5.0 Notes](./changelogs/v1.5.0.md) |
 | **`v1.6.0`** | 2026-07-29 | 🟢 Released | Search Engine Optimization (SEO), Dynamic XML Sitemap & Robots.txt | [📄 View v1.6.0 Notes](./changelogs/v1.6.0.md) |
+| **`v1.7.0`** | 2026-07-29 | 🟢 Released | Homepage Enhancements, Certificate Quick Verification & Atomic Commit Workflow | [📄 View v1.7.0 Notes](./changelogs/v1.7.0.md) |
 
 ---
 
 ## 🎉 [Production Milestone Reached]
 
-All planned modules (Phase 0 through Phase 9), full visual redesign (v1.2.0), Islamic cultural branding (v1.4.0), interactive 3D WebGL visuals (v1.5.0), and full SEO suite (v1.6.0) have been successfully built, tested, and documented.
+All planned modules (Phase 0 through Phase 9), full visual redesign (v1.2.0), Islamic cultural branding (v1.4.0), interactive 3D WebGL visuals (v1.5.0), full SEO suite (v1.6.0), and homepage section upgrades with atomic git workflows (v1.7.0) have been successfully built, tested, and documented.
+
 
 
 

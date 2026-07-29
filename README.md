@@ -157,7 +157,8 @@ MeeladFest/
 │   └── Implementation-Plan.md # Development Milestones
 ├── changelogs/              # Version Release Notes
 │   ├── v1.5.0.md            # Three.js 3D WebGL Visuals Release Notes
-│   └── v1.6.0.md            # SEO Suite & Sitemap Release Notes
+│   ├── v1.6.0.md            # SEO Suite & Sitemap Release Notes
+│   └── v1.7.0.md            # Homepage Enhancements & Atomic Commit Notes
 ├── src/
 │   ├── app/                 # Next.js App Router (Pages & REST Endpoints)
 │   │   ├── (auth)/          # Login & Registration Screens
@@ -168,13 +169,45 @@ MeeladFest/
 │   │   └── sitemap.ts       # Dynamic MongoDB XML Sitemap Generator
 │   ├── components/          # Design System & UI Components
 │   │   ├── fest/            # Podium, TabBar, LeaderboardRow, FestBanner
-│   │   ├── home/            # HeroSection, StatsBar, FestCard, FeatureGrid
+│   │   ├── home/            # HeroSection, StatsBar, FestCard, FeatureGrid, QuickVerifySection, AboutPlatformSection, FaqSection
 │   │   ├── layout/          # Navbar & Footer
 │   │   └── ui/              # ThreeHeroCanvas, GeometricPattern, OfficialChip, LiveBadge
 │   ├── lib/                 # Core Helpers (DB, Auth, Permissions, Audit Log)
 │   ├── models/              # Mongoose Data Models
 │   └── types/               # TypeScript Definitions
 ```
+
+---
+
+## 🌿 Contribution & Git Commit Guidelines
+
+To maintain a clean, readable, and traceable repository history, all contributors and AI assistants must follow the **Atomic Commit Workflow**:
+
+### 1. Atomic (File-by-File) Commits
+- **Do NOT bulk commit** multiple component files or pages into a single commit.
+- Stage and commit **one file (or one atomic component unit) at a time**.
+- *Rationale*: Atomic commits ensure precise code reviews, effortless `git revert` / `git cherry-pick` actions, and transparent commit history per component.
+
+### 2. Conventional Commit Messaging
+Format all commit messages adhering to the Conventional Commits standard:
+```bash
+# Example atomic commit workflow:
+git add src/components/home/QuickVerifySection.tsx
+git commit -m "feat(home): add QuickVerifySection component for instant certificate lookup"
+
+git add src/components/home/AboutPlatformSection.tsx
+git commit -m "feat(home): add AboutPlatformSection component for platform mission & features"
+
+git add src/app/page.tsx
+git commit -m "feat(home): integrate QuickVerify, AboutPlatform, and FAQ sections into home page"
+```
+
+Common prefixes:
+- `feat(scope)`: New features or UI components
+- `fix(scope)`: Bug fixes & patches
+- `docs(scope)`: Documentation, CHANGELOG, or README updates
+- `refactor(scope)`: Code restructuring without functional changes
+- `style(scope)`: UI styling or formatting tweaks
 
 ---
 
@@ -186,3 +219,4 @@ Distributed under the **MIT License**. See `LICENSE` for more information.
 <br />
 Crafted with ❤️ for Madrasa Cultural Festivals across Kerala.
 </div>
+
