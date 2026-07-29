@@ -20,10 +20,14 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 | **`v1.0.0`** | 2026-07-28 | 🟢 Released | Official Production Release, Security Polish & Docs | [📄 View v1.0.0 Notes](./changelogs/v1.0.0.md) |
 | **`v1.1.0`** | 2026-07-29 | 🟢 Released | Public UI/UX Overhaul, Podium Leaderboards & Hydration Fixes | [📄 View v1.1.0 Notes](./changelogs/v1.1.0.md) |
 | **`v1.2.0`** | 2026-07-29 | 🟢 Released | Islamic Modern UI/UX Redesign, Design Tokens & Component Primitives | [📄 View v1.2.0 Notes](./changelogs/v1.2.0.md) |
+| **`v1.3.0`** | 2026-07-29 | 🟢 Released | Real-Time Festival Countdown Spotlight Banner & Homepage Upgrades | [📄 View v1.3.0 Notes](./changelogs/v1.3.0.md) |
+| **`v1.4.0`** | 2026-07-29 | 🟢 Released | Islamic Cultural Aesthetics, Girih Patterns & Arabic Calligraphy | [📄 View v1.4.0 Notes](./changelogs/v1.4.0.md) |
+| **`v1.5.0`** | 2026-07-29 | 🟢 Released | Interactive 3D Three.js Hero Visuals (Crescent Moon, Star & Stardust) | [📄 View v1.5.0 Notes](./changelogs/v1.5.0.md) |
 
 ---
 
 ## 🎉 [Production Milestone Reached]
 
-All planned modules (Phase 0 through Phase 9) and full visual redesign (v1.2.0) have been successfully built, tested, and documented.
+All planned modules (Phase 0 through Phase 9), full visual redesign (v1.2.0), Islamic cultural branding (v1.4.0), and interactive 3D WebGL visuals (v1.5.0) have been successfully built, tested, and documented.
+
 
