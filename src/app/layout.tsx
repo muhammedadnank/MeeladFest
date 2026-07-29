@@ -6,13 +6,13 @@ import AuthProvider from '@/components/providers/AuthProvider';
 const amiri = Amiri({
   subsets: ['arabic', 'latin'],
   weight: ['400', '700'],
-  variable: '--font-amiri',
+  variable: '--font-amiri-next',
 });
 
 const inter = Inter({
   subsets: ['latin'],
   weight: ['300', '400', '500', '600', '700'],
-  variable: '--font-inter',
+  variable: '--font-inter-next',
 });
 
 export const metadata: Metadata = {

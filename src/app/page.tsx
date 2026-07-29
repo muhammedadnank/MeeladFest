@@ -35,7 +35,7 @@ export default async function Home() {
       <HeroSection />
 
       {/* Arabic Numeral Stats Bar */}
-      <StatsBar />
+      <StatsBar festCount={fests.length} />
 
       {/* Active Festivals Section */}
       <section id="active-fests" className="py-12 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto w-full flex-1">

@@ -19,8 +19,8 @@
   --color-border-warm: #e8e2d5;
   --color-text-dark: #1a2a1e;
 
-  --font-amiri: var(--font-amiri), serif;
-  --font-inter: var(--font-inter), sans-serif;
+  --font-amiri: var(--font-amiri-next), serif;
+  --font-inter: var(--font-inter-next), sans-serif;
 
   --radius-card: 12px;
   --radius-pill: 100px;

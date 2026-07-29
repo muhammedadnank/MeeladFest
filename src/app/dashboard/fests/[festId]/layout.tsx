@@ -180,7 +180,7 @@ export default function FestDashboardLayout({
 
       {/* Sidebar Navigation */}
       <aside
-        className={`fixed md:static inset-y-0 left-0 z-40 w-64 bg-emerald-950 text-white border-r border-emerald-900 flex flex-col justify-between transition-transform duration-300 relative overflow-hidden ${
+        className={`fixed md:static inset-y-0 left-0 z-40 w-64 bg-emerald-950 text-white border-r border-emerald-900 flex flex-col justify-between transition-transform duration-300 overflow-hidden ${
           sidebarOpen ? 'translate-x-0' : '-translate-x-full md:translate-x-0'
         }`}
       >

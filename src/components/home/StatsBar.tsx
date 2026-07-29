@@ -1,7 +1,13 @@
-export function StatsBar() {
+interface StatsBarProps {
+  festCount?: number;
+}
+
+export function StatsBar({ festCount }: StatsBarProps) {
+  const activeFestsDisplay = festCount !== undefined ? `${festCount}` : '١+';
+  
   const stats = [
-    { label: 'Active Programs', count: '١٢+', desc: 'Competitions & Stages' },
-    { label: 'Participants', count: '٢٤٠+', desc: 'Across All Categories' },
+    { label: 'Active Festivals', count: activeFestsDisplay, desc: 'Live Madrasa Fests' },
+    { label: 'Competitions & Stages', count: '١٠٠+', desc: 'Sub-category Programs' },
     { label: 'Certificates Engine', count: '١٠٠%', desc: 'Instant QR Verification' },
   ];
 
