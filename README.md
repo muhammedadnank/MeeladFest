@@ -2,8 +2,8 @@
 
 > **Multi-Tenant Madrasa Fest Management Platform**  
 > A modern, serverless Next.js web application empowering madrasas across Kerala to seamlessly organize, manage, and showcase their annual Meelad Fest (Arts & Cultural Competition) with live leaderboards, granular sub-admin access, activity audit logs, FAQ & feedback support, and self-service PDF certificates.
->
-> 🚀 **Live Demo:** [meelad-fest-kerala.vercel.app](https://meelad-fest-kerala.vercel.app)
+> 🚀 **Live Demo:** [https://meelad-fest-kerala.vercel.app/](https://meelad-fest-kerala.vercel.app/)  
+> 🎨 **Latest Version:** `v1.2.0` (Islamic Modern UI/UX Redesign)
 
 ---
 
@@ -129,7 +129,7 @@ MeeladFest is architected from the ground up to run on a **100% Zero-Cost (Free-
    ```env
    MONGODB_URI=mongodb+srv://<user>:<password>@cluster.mongodb.net/meeladfest?retryWrites=true&w=majority
    NEXTAUTH_SECRET=your_generated_secure_jwt_secret
-   NEXTAUTH_URL=https://your-app-name.vercel.app
+   NEXTAUTH_URL=https://meelad-fest-kerala.vercel.app
    RESEND_API_KEY=re_xxxxxxxxxxxxxxxxx
    CLOUDINARY_CLOUD_NAME=your_cloud_name
    CLOUDINARY_API_KEY=your_api_key
