@@ -10,6 +10,9 @@ import { FeatureGrid } from '@/components/home/FeatureGrid';
 import { SectionTitle } from '@/components/ui/SectionTitle';
 import { EmptyState } from '@/components/ui/EmptyState';
 import { FestivalCountdownBanner } from '@/components/home/FestivalCountdownBanner';
+import { QuickVerifySection } from '@/components/home/QuickVerifySection';
+import { AboutPlatformSection } from '@/components/home/AboutPlatformSection';
+import { FaqSection } from '@/components/home/FaqSection';
 
 async function getActiveFests() {
   try {
@@ -40,6 +43,9 @@ export default async function Home() {
 
       {/* Real-time Festival Countdown Spotlight Banner */}
       <FestivalCountdownBanner fests={fests} />
+
+      {/* Quick Certificate Verification Banner */}
+      <QuickVerifySection />
 
       {/* Islamic Ornament Divider */}
       <div className="flex items-center justify-center gap-3 text-gold-500/60 my-2 text-sm tracking-widest">
@@ -83,12 +89,26 @@ export default async function Home() {
         <span>۞</span>
       </div>
 
+      {/* About Platform Section */}
+      <AboutPlatformSection />
+
       {/* Feature Highlights Grid */}
       <FeatureGrid />
+
+      {/* Islamic Ornament Divider */}
+      <div className="flex items-center justify-center gap-3 text-gold-500/60 my-2 text-sm tracking-widest">
+        <span>۞</span>
+        <span className="text-gold-500">✦</span>
+        <span>۞</span>
+      </div>
+
+      {/* Frequently Asked Questions (FAQ) */}
+      <FaqSection />
 
       {/* Footer */}
       <Footer />
     </div>
   );
 }
+
 
