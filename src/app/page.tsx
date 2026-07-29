@@ -9,6 +9,7 @@ import { FestCard } from '@/components/home/FestCard';
 import { FeatureGrid } from '@/components/home/FeatureGrid';
 import { SectionTitle } from '@/components/ui/SectionTitle';
 import { EmptyState } from '@/components/ui/EmptyState';
+import { FestivalCountdownBanner } from '@/components/home/FestivalCountdownBanner';
 
 async function getActiveFests() {
   try {
@@ -37,22 +38,32 @@ export default async function Home() {
       {/* Arabic Numeral Stats Bar */}
       <StatsBar festCount={fests.length} />
 
+      {/* Real-time Festival Countdown Spotlight Banner */}
+      <FestivalCountdownBanner fests={fests} />
+
+      {/* Islamic Ornament Divider */}
+      <div className="flex items-center justify-center gap-3 text-gold-500/60 my-2 text-sm tracking-widest">
+        <span>۞</span>
+        <span className="text-gold-500">✦</span>
+        <span>۞</span>
+      </div>
+
       {/* Active Festivals Section */}
-      <section id="active-fests" className="py-12 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto w-full flex-1">
-        <SectionTitle subtitle="Select a festival to view live team scores, schedules, and certificates">
-          Active Festivals
+      <section id="active-fests" className="py-10 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto w-full flex-1">
+        <SectionTitle subtitle="തത്സമയ ടീം സ്കോറുകൾ, ഷെഡ്യൂളുകൾ, ഡിജിറ്റൽ സർട്ടിഫിക്കറ്റുകൾ എന്നിവ കാണാൻ ഫെസ്റ്റിവൽ തിരഞ്ഞെടുക്കുക">
+          ആക്ടീവ് ഫെസ്റ്റിവലുകൾ (Active Festivals)
         </SectionTitle>
 
         {fests.length === 0 ? (
           <EmptyState
-            title="No Active Festivals Currently"
-            description="Check back soon or sign in as an admin to launch your Madrasa festival."
+            title="നിലവിൽ ആക്ടീവ് ഫെസ്റ്റിവലുകൾ ലഭ്യമല്ല"
+            description="പുതിയ ഫെസ്റ്റിവലുകൾ ആരംഭിക്കുമ്പോൾ വിവരങ്ങൾ തത്സമയം ഇവിടെ പ്രത്യക്ഷപ്പെടും."
             action={
               <Link
                 href="/login"
-                className="inline-block bg-emerald-800 text-white px-5 py-2.5 rounded-lg text-xs font-semibold hover:bg-emerald-950 transition-colors"
+                className="inline-flex items-center gap-2 bg-gradient-to-r from-emerald-950 to-emerald-900 text-gold-200 border border-gold-500/40 px-6 py-2.5 rounded-xl text-xs font-bold hover:bg-emerald-900 transition-all shadow-md"
               >
-                Admin Sign In
+                <span>അഡ്മിൻ പോർട്ടലിൽ ലോഗിൻ ചെയ്യുക</span>
               </Link>
             }
           />
@@ -65,6 +76,13 @@ export default async function Home() {
         )}
       </section>
 
+      {/* Islamic Ornament Divider */}
+      <div className="flex items-center justify-center gap-3 text-gold-500/60 my-2 text-sm tracking-widest">
+        <span>۞</span>
+        <span className="text-gold-500">✦</span>
+        <span>۞</span>
+      </div>
+
       {/* Feature Highlights Grid */}
       <FeatureGrid />
 
@@ -73,3 +91,4 @@ export default async function Home() {
     </div>
   );
 }
+

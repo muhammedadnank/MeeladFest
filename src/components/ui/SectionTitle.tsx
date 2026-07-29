@@ -9,10 +9,12 @@ interface SectionTitleProps {
 export function SectionTitle({ children, subtitle, className = '' }: SectionTitleProps) {
   return (
     <div className={`mb-6 ${className}`}>
-      <h2 className="text-xs font-semibold text-text-dark uppercase tracking-[0.08em] flex items-center gap-2.5 before:content-[''] before:inline-block before:w-[3.5px] before:h-[15px] before:bg-emerald-800 before:rounded-sm">
-        {children}
+      <h2 className="text-sm font-extrabold text-emerald-950 uppercase tracking-wider flex items-center gap-2 font-serif">
+        <span className="text-gold-500 font-amiri text-base">۞</span>
+        <span>{children}</span>
       </h2>
-      {subtitle && <p className="text-xs text-text-dark/60 mt-1 pl-3.5">{subtitle}</p>}
+      {subtitle && <p className="text-xs text-text-dark/70 mt-1 pl-6 font-sans font-light">{subtitle}</p>}
     </div>
   );
 }
+
