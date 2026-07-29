@@ -10,6 +10,8 @@ import { FeatureGrid } from '@/components/home/FeatureGrid';
 import { SectionTitle } from '@/components/ui/SectionTitle';
 import { EmptyState } from '@/components/ui/EmptyState';
 
+import { FestivalCountdownBanner } from '@/components/home/FestivalCountdownBanner';
+
 async function getActiveFests() {
   try {
     await connectDB();
@@ -36,6 +38,9 @@ export default async function Home() {
 
       {/* Arabic Numeral Stats Bar */}
       <StatsBar festCount={fests.length} />
+
+      {/* Real-time Festival Countdown Spotlight Banner */}
+      <FestivalCountdownBanner fests={fests} />
 
       {/* Active Festivals Section */}
       <section id="active-fests" className="py-12 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto w-full flex-1">
