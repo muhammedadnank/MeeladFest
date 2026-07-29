@@ -157,7 +157,8 @@ MeeladFest/
 │   └── Implementation-Plan.md # Development Milestones
 ├── changelogs/              # Version Release Notes
 │   ├── v1.5.0.md            # Three.js 3D WebGL Visuals Release Notes
-│   └── v1.6.0.md            # SEO Suite & Sitemap Release Notes
+│   ├── v1.6.0.md            # SEO Suite & Sitemap Release Notes
+│   └── v1.7.0.md            # Homepage Enhancements & Atomic Commit Notes
 ├── src/
 │   ├── app/                 # Next.js App Router (Pages & REST Endpoints)
 │   │   ├── (auth)/          # Login & Registration Screens
@@ -168,7 +169,7 @@ MeeladFest/
 │   │   └── sitemap.ts       # Dynamic MongoDB XML Sitemap Generator
 │   ├── components/          # Design System & UI Components
 │   │   ├── fest/            # Podium, TabBar, LeaderboardRow, FestBanner
-│   │   ├── home/            # HeroSection, StatsBar, FestCard, FeatureGrid
+│   │   ├── home/            # HeroSection, StatsBar, FestCard, FeatureGrid, QuickVerifySection, AboutPlatformSection, FaqSection
 │   │   ├── layout/          # Navbar & Footer
 │   │   └── ui/              # ThreeHeroCanvas, GeometricPattern, OfficialChip, LiveBadge
 │   ├── lib/                 # Core Helpers (DB, Auth, Permissions, Audit Log)
