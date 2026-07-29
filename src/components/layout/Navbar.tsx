@@ -35,6 +35,12 @@ export function Navbar() {
 
         <div className="flex items-center gap-2 sm:gap-3">
           <Link
+            href="/about"
+            className="px-3 py-1.5 hover:bg-emerald-900 text-emerald-200 text-xs font-semibold rounded-lg transition-all"
+          >
+            <span>About</span>
+          </Link>
+          <Link
             href="/login"
             className="px-3 py-1.5 bg-emerald-900/90 hover:bg-emerald-800 text-emerald-100 border border-emerald-700/50 text-xs font-semibold rounded-lg transition-all flex items-center gap-1.5"
           >
