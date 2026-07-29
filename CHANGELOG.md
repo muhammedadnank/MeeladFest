@@ -23,11 +23,13 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 | **`v1.3.0`** | 2026-07-29 | 🟢 Released | Real-Time Festival Countdown Spotlight Banner & Homepage Upgrades | [📄 View v1.3.0 Notes](./changelogs/v1.3.0.md) |
 | **`v1.4.0`** | 2026-07-29 | 🟢 Released | Islamic Cultural Aesthetics, Girih Patterns & Arabic Calligraphy | [📄 View v1.4.0 Notes](./changelogs/v1.4.0.md) |
 | **`v1.5.0`** | 2026-07-29 | 🟢 Released | Interactive 3D Three.js Hero Visuals (Crescent Moon, Star & Stardust) | [📄 View v1.5.0 Notes](./changelogs/v1.5.0.md) |
+| **`v1.6.0`** | 2026-07-29 | 🟢 Released | Search Engine Optimization (SEO), Dynamic XML Sitemap & Robots.txt | [📄 View v1.6.0 Notes](./changelogs/v1.6.0.md) |
 
 ---
 
 ## 🎉 [Production Milestone Reached]
 
-All planned modules (Phase 0 through Phase 9), full visual redesign (v1.2.0), Islamic cultural branding (v1.4.0), and interactive 3D WebGL visuals (v1.5.0) have been successfully built, tested, and documented.
+All planned modules (Phase 0 through Phase 9), full visual redesign (v1.2.0), Islamic cultural branding (v1.4.0), interactive 3D WebGL visuals (v1.5.0), and full SEO suite (v1.6.0) have been successfully built, tested, and documented.
+
 
 
