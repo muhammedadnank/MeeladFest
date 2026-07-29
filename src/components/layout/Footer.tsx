@@ -33,6 +33,9 @@ export function Footer() {
             <Link href="/" className="hover:text-gold-200 transition-colors">
               ഹോം (Home)
             </Link>
+            <Link href="/about" className="hover:text-gold-200 transition-colors">
+              അബൗട്ട് (About)
+            </Link>
             <Link href="/#active-fests" className="hover:text-gold-200 transition-colors">
               ഫെസ്റ്റിവലുകൾ (Festivals)
             </Link>
