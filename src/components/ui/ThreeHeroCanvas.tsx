@@ -10,7 +10,19 @@ export function ThreeHeroCanvas() {
     const container = mountRef.current;
     if (!container) return;
 
-    // 1. Scene, Camera, Renderer Setup
+    // 1. Feature Detection & Safe WebGL Renderer Initialization
+    let renderer: THREE.WebGLRenderer;
+    try {
+      renderer = new THREE.WebGLRenderer({
+        alpha: true,
+        antialias: true,
+        powerPreference: 'high-performance',
+      });
+    } catch (e) {
+      console.warn('WebGL is unavailable or context creation failed. Skipping 3D Hero canvas.', e);
+      return;
+    }
+
     const width = container.clientWidth;
     const height = container.clientHeight;
 
@@ -18,7 +30,6 @@ export function ThreeHeroCanvas() {
     const camera = new THREE.PerspectiveCamera(45, width / height, 0.1, 1000);
     camera.position.set(0, 0, 10);
 
-    const renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true, powerPreference: 'high-performance' });
     renderer.setSize(width, height);
     renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
     renderer.shadowMap.enabled = true;
@@ -26,18 +37,18 @@ export function ThreeHeroCanvas() {
     container.appendChild(renderer.domElement);
 
     // 2. Lighting Setup (Gold & Emerald Ambient Glow)
-    const ambientLight = new THREE.AmbientLight(0x064e3b, 1.5); // Deep emerald ambient
+    const ambientLight = new THREE.AmbientLight(0x064e3b, 1.5);
     scene.add(ambientLight);
 
-    const mainGoldLight = new THREE.PointLight(0xf59e0b, 4, 30); // Warm gold spotlight
+    const mainGoldLight = new THREE.PointLight(0xf59e0b, 4, 30);
     mainGoldLight.position.set(5, 5, 8);
     scene.add(mainGoldLight);
 
-    const rimLight = new THREE.DirectionalLight(0x34d399, 2); // Emerald rim light
+    const rimLight = new THREE.DirectionalLight(0x34d399, 2);
     rimLight.position.set(-5, -5, 5);
     scene.add(rimLight);
 
-    const backGlow = new THREE.PointLight(0xfcd34d, 2, 20); // Soft gold backlight
+    const backGlow = new THREE.PointLight(0xfcd34d, 2, 20);
     backGlow.position.set(0, 0, -4);
     scene.add(backGlow);
 
@@ -47,9 +58,7 @@ export function ThreeHeroCanvas() {
     const R_inner = 1.45;
     const offset_x = 0.55;
 
-    // Outer Arc (Clockwise from top to bottom)
     crescentShape.absarc(0, 0, R_outer, Math.PI * 0.5, Math.PI * 1.5, true);
-    // Inner Arc (Counter-clockwise back to top)
     crescentShape.absarc(offset_x, 0, R_inner, Math.PI * 1.4, Math.PI * 0.6, false);
 
     const extrudeSettings: THREE.ExtrudeGeometryOptions = {
@@ -64,7 +73,6 @@ export function ThreeHeroCanvas() {
     const crescentGeo = new THREE.ExtrudeGeometry(crescentShape, extrudeSettings);
     crescentGeo.center();
 
-    // Metallic Gold Material
     const goldMaterial = new THREE.MeshStandardMaterial({
       color: 0xf59e0b,
       metalness: 0.85,
@@ -116,13 +124,12 @@ export function ThreeHeroCanvas() {
     const starMesh = new THREE.Mesh(starGeo, starMaterial);
     starMesh.position.set(1.4, 0.6, 0.5);
 
-    // Group Moon & Star
     const celestialGroup = new THREE.Group();
     celestialGroup.add(crescentMesh);
     celestialGroup.add(starMesh);
     scene.add(celestialGroup);
 
-    // 5. Create Floating 3D Gold Stardust Particles (Option 3)
+    // 5. Create Floating 3D Gold Stardust Particles
     const particleCount = 280;
     const particlePositions = new Float32Array(particleCount * 3);
     const particleScales = new Float32Array(particleCount);
@@ -140,7 +147,6 @@ export function ThreeHeroCanvas() {
     const particleGeo = new THREE.BufferGeometry();
     particleGeo.setAttribute('position', new THREE.BufferAttribute(particlePositions, 3));
 
-    // Particle Canvas Texture for glowing circular particles
     const canvas = document.createElement('canvas');
     canvas.width = 32;
     canvas.height = 32;
@@ -187,7 +193,7 @@ export function ThreeHeroCanvas() {
 
     // 7. Resize Handler
     const handleResize = () => {
-      if (!container) return;
+      if (!container || !renderer) return;
       const w = container.clientWidth;
       const h = container.clientHeight;
       camera.aspect = w / h;
@@ -197,12 +203,28 @@ export function ThreeHeroCanvas() {
 
     window.addEventListener('resize', handleResize);
 
-    // 8. Animation Loop
+    // 8. Viewport Visibility Optimization (IntersectionObserver)
+    let isVisible = true;
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          isVisible = entry.isIntersecting;
+        });
+      },
+      { threshold: 0.05 }
+    );
+    observer.observe(container);
+
+    // 9. Animation Loop (Paused when offscreen or tab inactive)
     let animationFrameId: number;
     let clock = new THREE.Clock();
 
     const animate = () => {
       animationFrameId = requestAnimationFrame(animate);
+
+      // Skip heavy calculation and WebGL render when canvas is not visible
+      if (!isVisible || document.hidden) return;
+
       const elapsedTime = clock.getElapsedTime();
 
       // Smooth mouse interpolation
@@ -224,7 +246,6 @@ export function ThreeHeroCanvas() {
         positions[i * 3 + 1] += particleSpeeds[i];
         positions[i * 3] += Math.sin(elapsedTime + i) * 0.002;
 
-        // Reset particle if out of bounds
         if (positions[i * 3 + 1] > 6) {
           positions[i * 3 + 1] = -6;
           positions[i * 3] = (Math.random() - 0.5) * 18;
@@ -240,9 +261,10 @@ export function ThreeHeroCanvas() {
 
     animate();
 
-    // 9. Cleanup
+    // 10. Cleanup
     return () => {
       cancelAnimationFrame(animationFrameId);
+      observer.disconnect();
       window.removeEventListener('mousemove', handleMouseMove);
       window.removeEventListener('resize', handleResize);
 
