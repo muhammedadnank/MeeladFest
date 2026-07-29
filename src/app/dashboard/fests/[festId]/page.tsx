@@ -37,7 +37,7 @@ export default async function FestDashboardOverviewPage({ params }: PageProps) {
   ]);
 
   return (
-    <div className="min-h-screen bg-slate-950 text-slate-100">
+    <div className="min-h-screen bg-cream text-text-dark font-inter">
       <FestAdminNav
         festId={festId}
         slug={fest.slug}
@@ -54,63 +54,63 @@ export default async function FestDashboardOverviewPage({ params }: PageProps) {
       <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-8">
         {/* Stat Cards Grid */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-          <div className="bg-slate-900/80 border border-slate-800 rounded-xl p-5 backdrop-blur-sm">
+          <div className="bg-white border border-border-warm rounded-card p-5 shadow-sm">
             <div className="flex items-center justify-between mb-2">
-              <span className="text-xs font-semibold text-slate-400 uppercase tracking-wider">
+              <span className="text-xs font-semibold text-emerald-950/60 uppercase tracking-wider">
                 Total Teams
               </span>
-              <Users className="w-5 h-5 text-emerald-400" />
+              <Users className="w-5 h-5 text-emerald-800" />
             </div>
-            <div className="text-3xl font-black text-slate-100">{teamsCount}</div>
+            <div className="text-3xl font-black text-emerald-950">{teamsCount}</div>
           </div>
 
-          <div className="bg-slate-900/80 border border-slate-800 rounded-xl p-5 backdrop-blur-sm">
+          <div className="bg-white border border-border-warm rounded-card p-5 shadow-sm">
             <div className="flex items-center justify-between mb-2">
-              <span className="text-xs font-semibold text-slate-400 uppercase tracking-wider">
+              <span className="text-xs font-semibold text-emerald-950/60 uppercase tracking-wider">
                 Total Items
               </span>
-              <ListOrdered className="w-5 h-5 text-teal-400" />
+              <ListOrdered className="w-5 h-5 text-emerald-800" />
             </div>
-            <div className="text-3xl font-black text-slate-100">{itemsCount}</div>
+            <div className="text-3xl font-black text-emerald-950">{itemsCount}</div>
           </div>
 
-          <div className="bg-slate-900/80 border border-slate-800 rounded-xl p-5 backdrop-blur-sm">
+          <div className="bg-white border border-border-warm rounded-card p-5 shadow-sm">
             <div className="flex items-center justify-between mb-2">
-              <span className="text-xs font-semibold text-slate-400 uppercase tracking-wider">
+              <span className="text-xs font-semibold text-emerald-950/60 uppercase tracking-wider">
                 Participants
               </span>
-              <UserCheck className="w-5 h-5 text-amber-400" />
+              <UserCheck className="w-5 h-5 text-gold-500" />
             </div>
-            <div className="text-3xl font-black text-slate-100">{participantsCount}</div>
+            <div className="text-3xl font-black text-emerald-950">{participantsCount}</div>
           </div>
 
-          <div className="bg-slate-900/80 border border-slate-800 rounded-xl p-5 backdrop-blur-sm">
+          <div className="bg-white border border-border-warm rounded-card p-5 shadow-sm">
             <div className="flex items-center justify-between mb-2">
-              <span className="text-xs font-semibold text-slate-400 uppercase tracking-wider">
+              <span className="text-xs font-semibold text-emerald-950/60 uppercase tracking-wider">
                 Results Entered
               </span>
-              <Trophy className="w-5 h-5 text-indigo-400" />
+              <Trophy className="w-5 h-5 text-gold-500" />
             </div>
-            <div className="text-3xl font-black text-slate-100">{resultsCount}</div>
+            <div className="text-3xl font-black text-emerald-950">{resultsCount}</div>
           </div>
         </div>
 
         {/* Quick Actions */}
         <div className="space-y-4">
-          <h2 className="text-lg font-bold text-slate-100">Management Modules</h2>
+          <h2 className="font-amiri text-2xl font-bold text-emerald-950">Management Modules</h2>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
             {canManageParticipants && (
               <Link
                 href={`/dashboard/fests/${festId}/participants`}
-                className="bg-slate-900/60 border border-slate-800 rounded-xl p-5 hover:border-emerald-500/50 hover:bg-slate-900 transition group"
+                className="bg-white border border-border-warm rounded-card p-5 hover:border-emerald-800 transition group shadow-sm"
               >
                 <div className="flex items-center justify-between mb-2">
-                  <h3 className="font-bold text-slate-200 group-hover:text-emerald-400 transition">
+                  <h3 className="font-bold text-emerald-950 group-hover:text-emerald-800 transition">
                     Participant Registration
                   </h3>
-                  <ArrowRight className="w-4 h-4 text-slate-500 group-hover:text-emerald-400 transition" />
+                  <ArrowRight className="w-4 h-4 text-emerald-800/40 group-hover:text-emerald-800 transition" />
                 </div>
-                <p className="text-xs text-slate-400">
+                <p className="text-xs text-text-dark/70">
                   Register individual participants and assign them to items.
                 </p>
               </Link>
@@ -119,15 +119,15 @@ export default async function FestDashboardOverviewPage({ params }: PageProps) {
             {canManageResults && (
               <Link
                 href={`/dashboard/fests/${festId}/results`}
-                className="bg-slate-900/60 border border-slate-800 rounded-xl p-5 hover:border-emerald-500/50 hover:bg-slate-900 transition group"
+                className="bg-white border border-border-warm rounded-card p-5 hover:border-emerald-800 transition group shadow-sm"
               >
                 <div className="flex items-center justify-between mb-2">
-                  <h3 className="font-bold text-slate-200 group-hover:text-emerald-400 transition">
+                  <h3 className="font-bold text-emerald-950 group-hover:text-emerald-800 transition">
                     Enter Results
                   </h3>
-                  <ArrowRight className="w-4 h-4 text-slate-500 group-hover:text-emerald-400 transition" />
+                  <ArrowRight className="w-4 h-4 text-emerald-800/40 group-hover:text-emerald-800 transition" />
                 </div>
-                <p className="text-xs text-slate-400">
+                <p className="text-xs text-text-dark/70">
                   Record item positions and calculate team points automatically.
                 </p>
               </Link>
@@ -136,15 +136,15 @@ export default async function FestDashboardOverviewPage({ params }: PageProps) {
             {isOwner && (
               <Link
                 href={`/dashboard/fests/${festId}/teams`}
-                className="bg-slate-900/60 border border-slate-800 rounded-xl p-5 hover:border-emerald-500/50 hover:bg-slate-900 transition group"
+                className="bg-white border border-border-warm rounded-card p-5 hover:border-emerald-800 transition group shadow-sm"
               >
                 <div className="flex items-center justify-between mb-2">
-                  <h3 className="font-bold text-slate-200 group-hover:text-emerald-400 transition">
+                  <h3 className="font-bold text-emerald-950 group-hover:text-emerald-800 transition">
                     Teams & Setup
                   </h3>
-                  <ArrowRight className="w-4 h-4 text-slate-500 group-hover:text-emerald-400 transition" />
+                  <ArrowRight className="w-4 h-4 text-emerald-800/40 group-hover:text-emerald-800 transition" />
                 </div>
-                <p className="text-xs text-slate-400">
+                <p className="text-xs text-text-dark/70">
                   Manage festival teams, categories, and item configurations.
                 </p>
               </Link>
@@ -153,34 +153,34 @@ export default async function FestDashboardOverviewPage({ params }: PageProps) {
         </div>
 
         {/* Fest Details Summary */}
-        <div className="bg-slate-900/80 border border-slate-800 rounded-2xl p-6 space-y-4">
-          <h2 className="text-lg font-bold text-slate-100 flex items-center gap-2">
-            <Shield className="w-5 h-5 text-emerald-400" /> Fest Specifications
+        <div className="bg-white border border-border-warm rounded-card p-6 space-y-4 shadow-sm">
+          <h2 className="font-amiri text-2xl font-bold text-emerald-950 flex items-center gap-2">
+            <Shield className="w-5 h-5 text-gold-500" /> Fest Specifications
           </h2>
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 text-sm text-slate-300">
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 text-sm text-text-dark">
             <div>
-              <span className="block text-xs text-slate-500 font-semibold">Madrasa / Inst</span>
+              <span className="block text-xs text-emerald-950/60 font-semibold">Madrasa / Inst</span>
               {fest.madrasaName}
             </div>
             <div>
-              <span className="block text-xs text-slate-500 font-semibold">Area & District</span>
+              <span className="block text-xs text-emerald-950/60 font-semibold">Area & District</span>
               {fest.area}, {fest.district}
             </div>
             <div>
-              <span className="block text-xs text-slate-500 font-semibold">Event Date</span>
+              <span className="block text-xs text-emerald-950/60 font-semibold">Event Date</span>
               {fest.date ? new Date(fest.date).toLocaleDateString() : 'TBD'}
             </div>
             <div>
-              <span className="block text-xs text-slate-500 font-semibold">Public Slug</span>
-              <span className="font-mono text-emerald-400">/{fest.slug}</span>
+              <span className="block text-xs text-emerald-950/60 font-semibold">Public Slug</span>
+              <span className="font-mono text-emerald-800 font-semibold">/{fest.slug}</span>
             </div>
             <div>
-              <span className="block text-xs text-slate-500 font-semibold">Status</span>
+              <span className="block text-xs text-emerald-950/60 font-semibold">Status</span>
               <span
                 className={`inline-block px-2 py-0.5 text-xs font-bold rounded ${
                   fest.isActive
-                    ? 'bg-emerald-950 text-emerald-400 border border-emerald-800'
-                    : 'bg-slate-800 text-slate-400'
+                    ? 'bg-emerald-100 text-emerald-900 border border-emerald-300'
+                    : 'bg-stone-100 text-stone-600'
                 }`}
               >
                 {fest.isActive ? 'Active' : 'Inactive'}

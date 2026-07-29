@@ -2,6 +2,8 @@
 
 import { useState, useEffect, useCallback } from 'react';
 import { Trophy, Award, RefreshCw, Shield, Search, Filter, Sparkles, Medal } from 'lucide-react';
+import { Podium } from '@/components/fest/Podium';
+import { LeaderboardRow } from '@/components/fest/LeaderboardRow';
 
 interface PublicLeaderboardProps {
   festIdOrSlug: string;
@@ -165,170 +167,34 @@ export default function PublicLeaderboard({ festIdOrSlug, categories: initialCat
             <>
               {/* Top 3 Teams Podium */}
               {top3Teams.length > 0 && (
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-                  {top3Teams[0] && (
-                    <div className="relative group bg-gradient-to-b from-amber-500/15 via-slate-900/90 to-slate-900 border border-amber-500/40 rounded-3xl p-6 text-center shadow-xl shadow-amber-500/10 backdrop-blur-md md:order-2 md:-translate-y-2 transition-transform duration-300">
-                      <div className="absolute -top-3 left-1/2 -translate-x-1/2 bg-amber-400 text-slate-950 text-[10px] font-black uppercase tracking-wider px-3.5 py-0.5 rounded-full flex items-center gap-1 shadow-lg">
-                        <Trophy className="w-3.5 h-3.5" /> 1st Rank Champion
-                      </div>
-                      <div className="w-16 h-16 mx-auto mt-2 rounded-2xl bg-amber-400/20 border border-amber-400/40 text-amber-300 text-3xl flex items-center justify-center shadow-inner">
-                        🏆
-                      </div>
-                      <div className="mt-3">
-                        <div className="flex items-center justify-center gap-2">
-                          <span
-                            className="w-3 h-3 rounded-full border border-white/20"
-                            style={{ backgroundColor: top3Teams[0].team.color || '#f59e0b' }}
-                          />
-                          <h4 className="text-lg font-black text-white">{top3Teams[0].team.name}</h4>
-                        </div>
-                        {top3Teams[0].team.code && (
-                          <span className="text-[10px] font-mono font-bold px-2 py-0.5 rounded bg-amber-500/20 text-amber-300 border border-amber-500/30 uppercase mt-1 inline-block">
-                            {top3Teams[0].team.code}
-                          </span>
-                        )}
-                      </div>
-
-                      <div className="mt-4 pt-4 border-t border-amber-500/20 flex items-center justify-between">
-                        <div className="text-left text-[11px] text-slate-400">
-                          <span className="text-amber-400 font-bold">🥇 {top3Teams[0].firstCount}</span> |{' '}
-                          <span className="text-slate-300 font-bold">🥈 {top3Teams[0].secondCount}</span> |{' '}
-                          <span className="text-amber-600 font-bold">🥉 {top3Teams[0].thirdCount}</span>
-                        </div>
-                        <div className="text-2xl font-black font-mono text-amber-300">{top3Teams[0].totalPoints} pts</div>
-                      </div>
-                    </div>
-                  )}
-
-                  {top3Teams[1] && (
-                    <div className="relative group bg-gradient-to-b from-slate-400/10 via-slate-900/90 to-slate-900 border border-slate-400/30 rounded-3xl p-6 text-center shadow-lg backdrop-blur-md md:order-1 transition-transform duration-300">
-                      <div className="absolute -top-3 left-1/2 -translate-x-1/2 bg-slate-300 text-slate-950 text-[10px] font-black uppercase tracking-wider px-3.5 py-0.5 rounded-full flex items-center gap-1 shadow-md">
-                        <Medal className="w-3.5 h-3.5" /> 2nd Rank
-                      </div>
-                      <div className="w-14 h-14 mx-auto mt-2 rounded-2xl bg-slate-400/20 border border-slate-400/30 text-slate-200 text-2xl flex items-center justify-center shadow-inner">
-                        🥈
-                      </div>
-                      <div className="mt-3">
-                        <div className="flex items-center justify-center gap-2">
-                          <span
-                            className="w-3 h-3 rounded-full border border-white/20"
-                            style={{ backgroundColor: top3Teams[1].team.color || '#94a3b8' }}
-                          />
-                          <h4 className="text-base font-extrabold text-white">{top3Teams[1].team.name}</h4>
-                        </div>
-                      </div>
-                      <div className="mt-4 pt-4 border-t border-slate-800 flex items-center justify-between">
-                        <div className="text-left text-[11px] text-slate-400">
-                          <span className="text-amber-400 font-bold">🥇 {top3Teams[1].firstCount}</span> |{' '}
-                          <span className="text-slate-300 font-bold">🥈 {top3Teams[1].secondCount}</span> |{' '}
-                          <span className="text-amber-600 font-bold">🥉 {top3Teams[1].thirdCount}</span>
-                        </div>
-                        <div className="text-xl font-bold font-mono text-slate-200">{top3Teams[1].totalPoints} pts</div>
-                      </div>
-                    </div>
-                  )}
-
-                  {top3Teams[2] && (
-                    <div className="relative group bg-gradient-to-b from-amber-700/15 via-slate-900/90 to-slate-900 border border-amber-700/30 rounded-3xl p-6 text-center shadow-lg backdrop-blur-md md:order-3 transition-transform duration-300">
-                      <div className="absolute -top-3 left-1/2 -translate-x-1/2 bg-amber-700 text-amber-100 text-[10px] font-black uppercase tracking-wider px-3.5 py-0.5 rounded-full flex items-center gap-1 shadow-md">
-                        <Award className="w-3.5 h-3.5" /> 3rd Rank
-                      </div>
-                      <div className="w-14 h-14 mx-auto mt-2 rounded-2xl bg-amber-700/20 border border-amber-700/30 text-amber-400 text-2xl flex items-center justify-center shadow-inner">
-                        🥉
-                      </div>
-                      <div className="mt-3">
-                        <div className="flex items-center justify-center gap-2">
-                          <span
-                            className="w-3 h-3 rounded-full border border-white/20"
-                            style={{ backgroundColor: top3Teams[2].team.color || '#b45309' }}
-                          />
-                          <h4 className="text-base font-extrabold text-white">{top3Teams[2].team.name}</h4>
-                        </div>
-                      </div>
-                      <div className="mt-4 pt-4 border-t border-slate-800 flex items-center justify-between">
-                        <div className="text-left text-[11px] text-slate-400">
-                          <span className="text-amber-400 font-bold">🥇 {top3Teams[2].firstCount}</span> |{' '}
-                          <span className="text-slate-300 font-bold">🥈 {top3Teams[2].secondCount}</span> |{' '}
-                          <span className="text-amber-600 font-bold">🥉 {top3Teams[2].thirdCount}</span>
-                        </div>
-                        <div className="text-xl font-bold font-mono text-amber-400">{top3Teams[2].totalPoints} pts</div>
-                      </div>
-                    </div>
-                  )}
-                </div>
+                <Podium
+                  topTeams={top3Teams.map((item) => ({
+                    teamId: item.team._id,
+                    teamName: item.team.name,
+                    teamCode: item.team.code,
+                    colorCode: item.team.color,
+                    totalPoints: item.totalPoints,
+                    rank: item.rank,
+                  }))}
+                />
               )}
 
               {/* All Teams Progress List */}
               <div className="space-y-3">
-                {teamLeaderboard.map((item) => {
-                  const percentage = Math.max(
-                    6,
-                    Math.min(100, Math.round((item.totalPoints / maxTeamPoints) * 100))
-                  );
-
-                  return (
-                    <div
-                      key={item.team._id}
-                      className="relative overflow-hidden bg-slate-900/80 hover:bg-slate-900 border border-slate-800/90 hover:border-slate-700 rounded-3xl p-5 transition-all shadow-xl backdrop-blur-xl group"
-                    >
-                      {/* Animated Gradient Bar Background */}
-                      <div
-                        className="absolute inset-y-0 left-0 bg-gradient-to-r from-emerald-500/10 to-teal-500/5 transition-all duration-1000 pointer-events-none rounded-l-3xl"
-                        style={{ width: `${percentage}%` }}
-                      />
-
-                      <div className="relative z-10 flex items-center justify-between gap-4">
-                        <div className="flex items-center gap-4 min-w-0">
-                          <div
-                            className={`w-11 h-11 rounded-2xl flex items-center justify-center font-black text-sm shrink-0 border shadow-md ${
-                              item.rank === 1
-                                ? 'bg-amber-500/20 border-amber-500/50 text-amber-300 shadow-amber-500/20'
-                                : item.rank === 2
-                                ? 'bg-slate-400/20 border-slate-400/40 text-slate-200'
-                                : item.rank === 3
-                                ? 'bg-amber-700/20 border-amber-700/40 text-amber-400'
-                                : 'bg-slate-950/80 border-slate-800 text-slate-400 font-mono'
-                            }`}
-                          >
-                            {item.rank === 1 ? '🥇' : item.rank === 2 ? '🥈' : item.rank === 3 ? '🥉' : `#${item.rank}`}
-                          </div>
-
-                          <div className="min-w-0">
-                            <div className="flex items-center gap-2.5">
-                              <span
-                                className="w-3.5 h-3.5 rounded-full shrink-0 border border-white/20 shadow-sm"
-                                style={{ backgroundColor: item.team.color || '#10b981' }}
-                              />
-                              <h4 className="text-base font-black text-white group-hover:text-emerald-400 transition-colors truncate">
-                                {item.team.name}
-                              </h4>
-                              {item.team.code && (
-                                <span className="text-[10px] font-mono font-bold px-2 py-0.5 rounded bg-slate-800/80 text-slate-400 border border-slate-700/80 uppercase">
-                                  {item.team.code}
-                                </span>
-                              )}
-                            </div>
-
-                            <div className="flex items-center gap-3 mt-1.5 text-xs text-slate-400">
-                              <span className="text-amber-400 font-bold">🥇 {item.firstCount} Firsts</span>
-                              <span className="text-slate-300 font-bold">🥈 {item.secondCount} Seconds</span>
-                              <span className="text-amber-600 font-bold">🥉 {item.thirdCount} Thirds</span>
-                            </div>
-                          </div>
-                        </div>
-
-                        <div className="text-right shrink-0">
-                          <div className="text-2xl sm:text-3xl font-black text-emerald-400 font-mono tracking-tight">
-                            {item.totalPoints}
-                          </div>
-                          <div className="text-[10px] font-bold text-slate-500 uppercase tracking-widest">
-                            Total Points
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  );
-                })}
+                {teamLeaderboard.map((item) => (
+                  <LeaderboardRow
+                    key={item.team._id}
+                    team={{
+                      teamId: item.team._id,
+                      teamName: item.team.name,
+                      teamCode: item.team.code,
+                      colorCode: item.team.color,
+                      totalPoints: item.totalPoints,
+                      rank: item.rank,
+                    }}
+                    maxPoints={maxTeamPoints}
+                  />
+                ))}
               </div>
             </>
           )}

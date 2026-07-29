@@ -19,6 +19,7 @@ import {
   X,
   Settings,
 } from 'lucide-react';
+import { GeometricPattern } from '@/components/ui/GeometricPattern';
 
 interface FestItem {
   _id: string;
@@ -131,38 +132,41 @@ export default function DashboardPage() {
 
   if (status === 'loading' || loading) {
     return (
-      <div className="min-h-screen flex items-center justify-center bg-slate-950 text-slate-100">
+      <div className="min-h-screen flex items-center justify-center bg-cream text-text-dark">
         <div className="flex flex-col items-center gap-3">
-          <Loader2 className="w-8 h-8 text-emerald-400 animate-spin" />
-          <p className="text-sm text-slate-400 font-medium">Loading Dashboard...</p>
+          <Loader2 className="w-8 h-8 text-emerald-800 animate-spin" />
+          <p className="text-sm text-emerald-950/70 font-medium">Loading Dashboard...</p>
         </div>
       </div>
     );
   }
 
   return (
-    <div className="min-h-screen bg-slate-950 text-slate-100 flex flex-col">
+    <div className="min-h-screen bg-cream text-text-dark flex flex-col font-inter">
       {/* Header Bar */}
-      <header className="border-b border-slate-800/80 bg-slate-900/60 backdrop-blur-xl sticky top-0 z-40">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex items-center justify-between">
-          <Link href="/dashboard" className="flex items-center gap-2 text-2xl font-extrabold tracking-tight">
-            <span className="bg-gradient-to-r from-emerald-400 to-teal-300 bg-clip-text text-transparent">
-              MeeladFest
+      <header className="bg-emerald-950 text-white border-b border-emerald-900 sticky top-0 z-40 shadow-sm relative overflow-hidden">
+        <GeometricPattern className="absolute -top-12 -right-12 w-48 h-48 opacity-[0.06] text-white pointer-events-none" />
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3.5 flex items-center justify-between relative z-10">
+          <Link href="/dashboard" className="flex items-center gap-2.5">
+            <span className="font-amiri text-2xl font-bold tracking-tight text-white flex items-center gap-2">
+              <span className="text-gold-500 text-xl">☽</span> MeeladFest
             </span>
-            <Sparkles className="w-5 h-5 text-emerald-400" />
+            <span className="hidden sm:inline-block px-2 py-0.5 rounded text-[10px] uppercase font-bold tracking-wider bg-gold-500/20 text-gold-200 border border-gold-500/30">
+              Admin Portal
+            </span>
           </Link>
 
           <div className="flex items-center gap-4">
             <div className="text-right hidden sm:block">
-              <p className="text-sm font-semibold text-slate-200">{session?.user?.name}</p>
-              <p className="text-xs text-slate-400">{session?.user?.email}</p>
+              <p className="text-xs font-semibold text-white">{session?.user?.name}</p>
+              <p className="text-[11px] text-emerald-200/70">{session?.user?.email}</p>
             </div>
             <button
               onClick={() => signOut({ callbackUrl: '/login' })}
-              className="p-2.5 rounded-xl bg-slate-800/60 hover:bg-slate-800 border border-slate-700/50 text-slate-300 hover:text-slate-100 transition-colors flex items-center gap-2 text-xs font-medium cursor-pointer"
+              className="px-3 py-1.5 rounded-lg bg-emerald-900/60 hover:bg-emerald-900 border border-emerald-800 text-emerald-100 transition-colors flex items-center gap-2 text-xs font-medium cursor-pointer"
               title="Sign Out"
             >
-              <LogOut className="w-4 h-4 text-rose-400" />
+              <LogOut className="w-3.5 h-3.5 text-gold-500" />
               <span className="hidden sm:inline">Sign Out</span>
             </button>
           </div>
@@ -174,43 +178,43 @@ export default function DashboardPage() {
         {/* Banner Title & Create Action */}
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-8">
           <div>
-            <h1 className="text-2xl sm:text-3xl font-extrabold tracking-tight text-white">
+            <h1 className="font-amiri text-3xl sm:text-4xl font-bold tracking-tight text-emerald-950">
               Festival Management
             </h1>
-            <p className="mt-1 text-sm text-slate-400">
+            <p className="mt-1 text-sm text-emerald-950/70">
               Select a festival to manage participants, entries, live results, and updates.
             </p>
           </div>
 
           <button
             onClick={() => setShowModal(true)}
-            className="py-3 px-5 bg-gradient-to-r from-emerald-500 to-teal-500 hover:from-emerald-400 hover:to-teal-400 text-slate-950 font-bold rounded-xl shadow-lg shadow-emerald-500/20 hover:shadow-emerald-500/30 transition-all flex items-center justify-center gap-2 text-sm cursor-pointer self-start sm:self-auto"
+            className="py-2.5 px-5 bg-gold-500 hover:bg-[#b07d20] text-white font-medium rounded-lg shadow-md transition-all flex items-center justify-center gap-2 text-sm cursor-pointer self-start sm:self-auto"
           >
-            <Plus className="w-5 h-5" />
+            <Plus className="w-4 h-4" />
             Create New Fest
           </button>
         </div>
 
         {error && (
-          <div className="mb-6 p-4 rounded-xl bg-rose-500/10 border border-rose-500/20 text-rose-400 text-sm font-medium flex items-center gap-2">
-            <AlertCircle className="w-5 h-5 flex-shrink-0" />
+          <div className="mb-6 p-4 rounded-lg bg-rose-50 border border-rose-200 text-rose-800 text-sm font-medium flex items-center gap-2">
+            <AlertCircle className="w-5 h-5 flex-shrink-0 text-rose-600" />
             {error}
           </div>
         )}
 
         {/* Fest Cards Grid */}
         {fests.length === 0 ? (
-          <div className="bg-slate-900/40 border border-slate-800/80 rounded-2xl p-12 text-center max-w-xl mx-auto my-12">
-            <div className="w-16 h-16 rounded-2xl bg-emerald-500/10 border border-emerald-500/20 flex items-center justify-center mx-auto mb-4 text-emerald-400">
+          <div className="bg-white border border-border-warm rounded-card p-12 text-center max-w-xl mx-auto my-12 shadow-sm">
+            <div className="w-16 h-16 rounded-full bg-emerald-100 border border-emerald-200 flex items-center justify-center mx-auto mb-4 text-emerald-800">
               <Building2 className="w-8 h-8" />
             </div>
-            <h3 className="text-lg font-bold text-slate-200">No Festivals Found</h3>
-            <p className="mt-2 text-sm text-slate-400">
+            <h3 className="font-amiri text-xl font-bold text-emerald-950">No Festivals Found</h3>
+            <p className="mt-2 text-sm text-emerald-950/70">
               You haven't created or been added to any festival yet. Click below to launch your first festival.
             </p>
             <button
               onClick={() => setShowModal(true)}
-              className="mt-6 inline-flex items-center gap-2 px-5 py-2.5 bg-emerald-500/20 hover:bg-emerald-500/30 text-emerald-300 font-semibold rounded-xl border border-emerald-500/30 transition-colors text-sm cursor-pointer"
+              className="mt-6 inline-flex items-center gap-2 px-5 py-2.5 bg-emerald-800 hover:bg-emerald-950 text-white font-medium rounded-lg transition-colors text-sm cursor-pointer shadow-sm"
             >
               <Plus className="w-4 h-4" />
               Create Festival
@@ -221,86 +225,93 @@ export default function DashboardPage() {
             {fests.map((fest) => (
               <div
                 key={fest._id}
-                className="group bg-slate-900/70 hover:bg-slate-900 border border-slate-800/80 hover:border-slate-700/80 rounded-2xl p-6 transition-all shadow-xl hover:shadow-2xl flex flex-col justify-between"
+                className="group bg-white border border-border-warm hover:border-emerald-800 rounded-card overflow-hidden transition-all shadow-sm hover:shadow-md flex flex-col justify-between"
               >
-                <div>
-                  <div className="flex items-start justify-between gap-2 mb-3">
+                {/* Top Dark Emerald Header */}
+                <div className="bg-gradient-to-br from-emerald-950 via-emerald-900 to-emerald-800 p-5 text-white relative overflow-hidden">
+                  <GeometricPattern className="absolute -top-10 -right-10 w-36 h-36 opacity-[0.08] text-white pointer-events-none" />
+
+                  <div className="flex items-start justify-between gap-2 mb-3 relative z-10">
                     <span
-                      className={`inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold uppercase tracking-wider ${
+                      className={`inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-[10px] font-semibold uppercase tracking-wider ${
                         fest.role === 'owner'
-                          ? 'bg-emerald-500/10 text-emerald-400 border border-emerald-500/20'
-                          : 'bg-indigo-500/10 text-indigo-400 border border-indigo-500/20'
+                          ? 'bg-gold-500/20 text-gold-200 border border-gold-500/40'
+                          : 'bg-emerald-100/20 text-emerald-200 border border-emerald-100/30'
                       }`}
                     >
-                      <ShieldCheck className="w-3.5 h-3.5" />
+                      <ShieldCheck className="w-3 h-3 text-gold-500" />
                       {fest.role === 'owner' ? 'Owner' : 'Sub-Admin'}
                     </span>
 
                     {fest.isActive ? (
-                      <span className="inline-flex items-center gap-1 text-xs text-emerald-400 font-medium">
-                        <span className="w-2 h-2 rounded-full bg-emerald-400 animate-ping"></span>
+                      <span className="inline-flex items-center gap-1 text-[11px] text-emerald-200 font-medium">
+                        <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
                         Active
                       </span>
                     ) : (
-                      <span className="text-xs text-slate-500 font-medium">Inactive</span>
+                      <span className="text-[11px] text-emerald-200/50 font-medium">Inactive</span>
                     )}
                   </div>
 
-                  <h3 className="text-xl font-bold text-slate-100 group-hover:text-emerald-400 transition-colors line-clamp-1">
+                  <h3 className="font-amiri text-2xl font-bold text-white group-hover:text-gold-200 transition-colors line-clamp-1 relative z-10">
                     {fest.festName}
                   </h3>
 
-                  <p className="text-xs font-medium text-slate-400 mt-1 flex items-center gap-1.5 line-clamp-1">
-                    <Building2 className="w-3.5 h-3.5 text-slate-500 shrink-0" />
+                  <p className="text-xs font-medium text-emerald-200/80 mt-1 flex items-center gap-1.5 line-clamp-1 relative z-10">
+                    <Building2 className="w-3.5 h-3.5 text-gold-500 shrink-0" />
                     {fest.madrasaName}
                   </p>
+                </div>
 
-                  <div className="mt-4 pt-4 border-t border-slate-800/80 space-y-2 text-xs text-slate-300">
-                    <div className="flex items-center gap-2">
-                      <MapPin className="w-4 h-4 text-emerald-400 shrink-0" />
-                      <span>
+                {/* Card Body */}
+                <div className="p-5 flex-1 flex flex-col justify-between bg-white text-text-dark">
+                  <div className="space-y-2.5 text-xs">
+                    <div className="flex items-center gap-2 text-text-dark/80">
+                      <MapPin className="w-4 h-4 text-emerald-800 shrink-0" />
+                      <span className="font-medium">
                         {fest.area}, {fest.district}
                       </span>
                     </div>
 
                     {fest.date && (
-                      <div className="flex items-center gap-2">
-                        <Calendar className="w-4 h-4 text-emerald-400 shrink-0" />
+                      <div className="flex items-center gap-2 text-text-dark/80">
+                        <Calendar className="w-4 h-4 text-emerald-800 shrink-0" />
                         <span>{fest.date}</span>
                       </div>
                     )}
                   </div>
-                </div>
 
-                <div className="mt-6 pt-4 border-t border-slate-800/80 flex items-center justify-between gap-2">
-                  <div className="flex items-center gap-2">
-                    <Link
-                      href={`/dashboard/fests/${fest._id}`}
-                      className="px-4 py-2 bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-bold rounded-xl text-xs transition-colors flex items-center gap-1.5 shadow-md shadow-emerald-500/10"
-                    >
-                      <Settings className="w-3.5 h-3.5" />
-                      Manage
-                    </Link>
+                  {/* Card Actions Footer */}
+                  <div className="mt-6 pt-4 border-t border-border-warm flex items-center justify-between gap-2">
+                    <div className="flex items-center gap-2">
+                      <Link
+                        href={`/dashboard/fests/${fest._id}`}
+                        className="px-4 py-2 bg-emerald-800 hover:bg-emerald-950 text-white font-medium rounded-lg text-xs transition-colors flex items-center gap-1.5 shadow-sm"
+                      >
+                        <Settings className="w-3.5 h-3.5 text-gold-500" />
+                        Manage
+                      </Link>
 
-                    <Link
-                      href={`/fests/${fest.slug}`}
-                      target="_blank"
-                      className="p-2 bg-slate-800 hover:bg-slate-700 text-slate-300 hover:text-slate-100 rounded-xl transition-colors text-xs"
-                      title="Public Festival Site"
-                    >
-                      <ExternalLink className="w-4 h-4" />
-                    </Link>
+                      <Link
+                        href={`/fests/${fest.slug}`}
+                        target="_blank"
+                        className="p-2 bg-emerald-100 hover:bg-emerald-200 text-emerald-800 rounded-lg transition-colors text-xs"
+                        title="Public Festival Site"
+                      >
+                        <ExternalLink className="w-4 h-4" />
+                      </Link>
+                    </div>
+
+                    {fest.role === 'owner' && (
+                      <button
+                        onClick={() => handleDeleteFest(fest._id, fest.festName)}
+                        className="p-2 text-text-dark/40 hover:text-rose-600 hover:bg-rose-50 rounded-lg transition-colors"
+                        title="Delete Festival"
+                      >
+                        <Trash2 className="w-4 h-4" />
+                      </button>
+                    )}
                   </div>
-
-                  {fest.role === 'owner' && (
-                    <button
-                      onClick={() => handleDeleteFest(fest._id, fest.festName)}
-                      className="p-2 text-slate-500 hover:text-rose-400 hover:bg-rose-500/10 rounded-xl transition-colors"
-                      title="Delete Festival"
-                    >
-                      <Trash2 className="w-4 h-4" />
-                    </button>
-                  )}
                 </div>
               </div>
             ))}
@@ -310,23 +321,23 @@ export default function DashboardPage() {
 
       {/* Create Festival Modal */}
       {showModal && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-950/80 backdrop-blur-md animate-in fade-in">
-          <div className="bg-slate-900 border border-slate-800 rounded-2xl w-full max-w-lg p-6 shadow-2xl relative max-h-[90vh] overflow-y-auto">
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-emerald-950/60 backdrop-blur-sm animate-in fade-in">
+          <div className="bg-white border border-border-warm rounded-card w-full max-w-lg p-6 shadow-2xl relative max-h-[90vh] overflow-y-auto">
             <button
               onClick={() => setShowModal(false)}
-              className="absolute top-4 right-4 text-slate-400 hover:text-slate-200 p-1 rounded-lg hover:bg-slate-800 transition-colors"
+              className="absolute top-4 right-4 text-text-dark/60 hover:text-text-dark p-1 rounded-lg hover:bg-emerald-50 transition-colors"
             >
               <X className="w-5 h-5" />
             </button>
 
-            <h2 className="text-xl font-bold text-slate-100 mb-1">Create New Festival</h2>
-            <p className="text-xs text-slate-400 mb-6">
+            <h2 className="font-amiri text-2xl font-bold text-emerald-950 mb-1">Create New Festival</h2>
+            <p className="text-xs text-text-dark/70 mb-6">
               Fill in the festival details below to initialize management tools.
             </p>
 
             <form onSubmit={handleCreateFest} className="space-y-4">
               <div>
-                <label className="block text-xs font-semibold uppercase tracking-wider text-slate-400 mb-1">
+                <label className="block text-xs font-semibold uppercase tracking-wider text-emerald-950 mb-1">
                   Fest Name *
                 </label>
                 <input
@@ -335,12 +346,12 @@ export default function DashboardPage() {
                   value={formData.festName}
                   onChange={(e) => setFormData({ ...formData, festName: e.target.value })}
                   placeholder="e.g. Meelad Fest 2026"
-                  className="w-full bg-slate-950 border border-slate-800 rounded-xl px-3.5 py-2.5 text-slate-100 placeholder-slate-600 focus:outline-none focus:ring-2 focus:ring-emerald-500/50 text-sm"
+                  className="w-full bg-cream/60 border border-border-warm rounded-lg px-3.5 py-2.5 text-text-dark placeholder-text-dark/40 focus:outline-none focus:ring-2 focus:ring-emerald-800 focus:border-emerald-800 text-sm"
                 />
               </div>
 
               <div>
-                <label className="block text-xs font-semibold uppercase tracking-wider text-slate-400 mb-1">
+                <label className="block text-xs font-semibold uppercase tracking-wider text-emerald-950 mb-1">
                   Madrasa / Institution Name *
                 </label>
                 <input
@@ -349,13 +360,13 @@ export default function DashboardPage() {
                   value={formData.madrasaName}
                   onChange={(e) => setFormData({ ...formData, madrasaName: e.target.value })}
                   placeholder="e.g. Busthanul Uloom Madrasa"
-                  className="w-full bg-slate-950 border border-slate-800 rounded-xl px-3.5 py-2.5 text-slate-100 placeholder-slate-600 focus:outline-none focus:ring-2 focus:ring-emerald-500/50 text-sm"
+                  className="w-full bg-cream/60 border border-border-warm rounded-lg px-3.5 py-2.5 text-text-dark placeholder-text-dark/40 focus:outline-none focus:ring-2 focus:ring-emerald-800 focus:border-emerald-800 text-sm"
                 />
               </div>
 
               <div className="grid grid-cols-2 gap-4">
                 <div>
-                  <label className="block text-xs font-semibold uppercase tracking-wider text-slate-400 mb-1">
+                  <label className="block text-xs font-semibold uppercase tracking-wider text-emerald-950 mb-1">
                     Area / Mahallu *
                   </label>
                   <input
@@ -364,12 +375,12 @@ export default function DashboardPage() {
                     value={formData.area}
                     onChange={(e) => setFormData({ ...formData, area: e.target.value })}
                     placeholder="e.g. Manjeri"
-                    className="w-full bg-slate-950 border border-slate-800 rounded-xl px-3.5 py-2.5 text-slate-100 placeholder-slate-600 focus:outline-none focus:ring-2 focus:ring-emerald-500/50 text-sm"
+                    className="w-full bg-cream/60 border border-border-warm rounded-lg px-3.5 py-2.5 text-text-dark placeholder-text-dark/40 focus:outline-none focus:ring-2 focus:ring-emerald-800 focus:border-emerald-800 text-sm"
                   />
                 </div>
 
                 <div>
-                  <label className="block text-xs font-semibold uppercase tracking-wider text-slate-400 mb-1">
+                  <label className="block text-xs font-semibold uppercase tracking-wider text-emerald-950 mb-1">
                     District *
                   </label>
                   <input
@@ -378,14 +389,14 @@ export default function DashboardPage() {
                     value={formData.district}
                     onChange={(e) => setFormData({ ...formData, district: e.target.value })}
                     placeholder="e.g. Malappuram"
-                    className="w-full bg-slate-950 border border-slate-800 rounded-xl px-3.5 py-2.5 text-slate-100 placeholder-slate-600 focus:outline-none focus:ring-2 focus:ring-emerald-500/50 text-sm"
+                    className="w-full bg-cream/60 border border-border-warm rounded-lg px-3.5 py-2.5 text-text-dark placeholder-text-dark/40 focus:outline-none focus:ring-2 focus:ring-emerald-800 focus:border-emerald-800 text-sm"
                   />
                 </div>
               </div>
 
               <div className="grid grid-cols-2 gap-4">
                 <div>
-                  <label className="block text-xs font-semibold uppercase tracking-wider text-slate-400 mb-1">
+                  <label className="block text-xs font-semibold uppercase tracking-wider text-emerald-950 mb-1">
                     Date
                   </label>
                   <input
@@ -393,12 +404,12 @@ export default function DashboardPage() {
                     value={formData.date}
                     onChange={(e) => setFormData({ ...formData, date: e.target.value })}
                     placeholder="e.g. 12 Rabiul Awwal"
-                    className="w-full bg-slate-950 border border-slate-800 rounded-xl px-3.5 py-2.5 text-slate-100 placeholder-slate-600 focus:outline-none focus:ring-2 focus:ring-emerald-500/50 text-sm"
+                    className="w-full bg-cream/60 border border-border-warm rounded-lg px-3.5 py-2.5 text-text-dark placeholder-text-dark/40 focus:outline-none focus:ring-2 focus:ring-emerald-800 focus:border-emerald-800 text-sm"
                   />
                 </div>
 
                 <div>
-                  <label className="block text-xs font-semibold uppercase tracking-wider text-slate-400 mb-1">
+                  <label className="block text-xs font-semibold uppercase tracking-wider text-emerald-950 mb-1">
                     Venue
                   </label>
                   <input
@@ -406,13 +417,13 @@ export default function DashboardPage() {
                     value={formData.venue}
                     onChange={(e) => setFormData({ ...formData, venue: e.target.value })}
                     placeholder="e.g. Madrasa Auditorium"
-                    className="w-full bg-slate-950 border border-slate-800 rounded-xl px-3.5 py-2.5 text-slate-100 placeholder-slate-600 focus:outline-none focus:ring-2 focus:ring-emerald-500/50 text-sm"
+                    className="w-full bg-cream/60 border border-border-warm rounded-lg px-3.5 py-2.5 text-text-dark placeholder-text-dark/40 focus:outline-none focus:ring-2 focus:ring-emerald-800 focus:border-emerald-800 text-sm"
                   />
                 </div>
               </div>
 
               <div>
-                <label className="block text-xs font-semibold uppercase tracking-wider text-slate-400 mb-1">
+                <label className="block text-xs font-semibold uppercase tracking-wider text-emerald-950 mb-1">
                   Description
                 </label>
                 <textarea
@@ -420,22 +431,22 @@ export default function DashboardPage() {
                   value={formData.description}
                   onChange={(e) => setFormData({ ...formData, description: e.target.value })}
                   placeholder="Optional brief note about the fest..."
-                  className="w-full bg-slate-950 border border-slate-800 rounded-xl px-3.5 py-2.5 text-slate-100 placeholder-slate-600 focus:outline-none focus:ring-2 focus:ring-emerald-500/50 text-sm resize-none"
+                  className="w-full bg-cream/60 border border-border-warm rounded-lg px-3.5 py-2.5 text-text-dark placeholder-text-dark/40 focus:outline-none focus:ring-2 focus:ring-emerald-800 focus:border-emerald-800 text-sm resize-none"
                 />
               </div>
 
-              <div className="pt-4 flex justify-end gap-3 border-t border-slate-800">
+              <div className="pt-4 flex justify-end gap-3 border-t border-border-warm">
                 <button
                   type="button"
                   onClick={() => setShowModal(false)}
-                  className="px-4 py-2 bg-slate-800 hover:bg-slate-700 text-slate-300 font-semibold rounded-xl text-xs transition-colors cursor-pointer"
+                  className="px-4 py-2 bg-emerald-100 hover:bg-emerald-200 text-emerald-950 font-medium rounded-lg text-xs transition-colors cursor-pointer"
                 >
                   Cancel
                 </button>
                 <button
                   type="submit"
                   disabled={creating}
-                  className="px-5 py-2 bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-bold rounded-xl text-xs shadow-lg shadow-emerald-500/20 transition-all flex items-center gap-2 cursor-pointer disabled:opacity-50"
+                  className="px-5 py-2 bg-gold-500 hover:bg-[#b07d20] text-white font-medium rounded-lg text-xs shadow-md transition-all flex items-center gap-2 cursor-pointer disabled:opacity-50"
                 >
                   {creating ? <Loader2 className="w-4 h-4 animate-spin" /> : <Plus className="w-4 h-4" />}
                   Create Fest
